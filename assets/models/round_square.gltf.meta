@@ -1,0 +1,75 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "2a3b25e8-7e8e-4ade-892f-9d931c0094d0",
+  "files": [],
+  "subMetas": {
+    "5b3aa": {
+      "importer": "gltf-mesh",
+      "uuid": "2a3b25e8-7e8e-4ade-892f-9d931c0094d0@5b3aa",
+      "displayName": "",
+      "id": "5b3aa",
+      "name": "full.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 22
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4aafe": {
+      "importer": "gltf-scene",
+      "uuid": "2a3b25e8-7e8e-4ade-892f-9d931c0094d0@4aafe",
+      "displayName": "",
+      "id": "4aafe",
+      "name": "round_square.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "2a3b25e8-7e8e-4ade-892f-9d931c0094d0@5b3aa"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "2a3b25e8-7e8e-4ade-892f-9d931c0094d0@4aafe"
+      ]
+    }
+  }
+}

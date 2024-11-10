@@ -1,0 +1,75 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "e7e479bf-d1a9-4a7f-ae72-ade136883d6f",
+  "files": [],
+  "subMetas": {
+    "841c1": {
+      "importer": "gltf-mesh",
+      "uuid": "e7e479bf-d1a9-4a7f-ae72-ade136883d6f@841c1",
+      "displayName": "",
+      "id": "841c1",
+      "name": "fence.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 180
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "4379c": {
+      "importer": "gltf-scene",
+      "uuid": "e7e479bf-d1a9-4a7f-ae72-ade136883d6f@4379c",
+      "displayName": "",
+      "id": "4379c",
+      "name": "fence.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "e7e479bf-d1a9-4a7f-ae72-ade136883d6f@841c1"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "e7e479bf-d1a9-4a7f-ae72-ade136883d6f@4379c"
+      ]
+    }
+  }
+}

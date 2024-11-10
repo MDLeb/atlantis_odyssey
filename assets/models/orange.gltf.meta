@@ -1,0 +1,75 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "f671ab17-9325-4f48-93a7-83e8f90c0518",
+  "files": [],
+  "subMetas": {
+    "deaaf": {
+      "importer": "gltf-mesh",
+      "uuid": "f671ab17-9325-4f48-93a7-83e8f90c0518@deaaf",
+      "displayName": "",
+      "id": "deaaf",
+      "name": "orange.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 256
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "09d3f": {
+      "importer": "gltf-scene",
+      "uuid": "f671ab17-9325-4f48-93a7-83e8f90c0518@09d3f",
+      "displayName": "",
+      "id": "09d3f",
+      "name": "orange.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "f671ab17-9325-4f48-93a7-83e8f90c0518@deaaf"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "f671ab17-9325-4f48-93a7-83e8f90c0518@09d3f"
+      ]
+    }
+  }
+}

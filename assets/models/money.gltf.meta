@@ -1,0 +1,75 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "1c327e3e-37a5-4932-9fb7-56a2716a1f32",
+  "files": [],
+  "subMetas": {
+    "1ad21": {
+      "importer": "gltf-mesh",
+      "uuid": "1c327e3e-37a5-4932-9fb7-56a2716a1f32@1ad21",
+      "displayName": "",
+      "id": "1ad21",
+      "name": "money.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 1430
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "42efd": {
+      "importer": "gltf-scene",
+      "uuid": "1c327e3e-37a5-4932-9fb7-56a2716a1f32@42efd",
+      "displayName": "",
+      "id": "42efd",
+      "name": "money.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "1c327e3e-37a5-4932-9fb7-56a2716a1f32@1ad21"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "1c327e3e-37a5-4932-9fb7-56a2716a1f32@42efd"
+      ]
+    }
+  }
+}

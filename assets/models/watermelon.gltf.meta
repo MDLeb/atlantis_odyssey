@@ -1,0 +1,75 @@
+{
+  "ver": "2.3.13",
+  "importer": "gltf",
+  "imported": true,
+  "uuid": "2660700c-a0a8-4e47-b9f2-8f2470064721",
+  "files": [],
+  "subMetas": {
+    "d9f64": {
+      "importer": "gltf-mesh",
+      "uuid": "2660700c-a0a8-4e47-b9f2-8f2470064721@d9f64",
+      "displayName": "",
+      "id": "d9f64",
+      "name": "watermelon.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 480
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c1587": {
+      "importer": "gltf-scene",
+      "uuid": "2660700c-a0a8-4e47-b9f2-8f2470064721@c1587",
+      "displayName": "",
+      "id": "c1587",
+      "name": "watermelon.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "2660700c-a0a8-4e47-b9f2-8f2470064721@d9f64"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "2660700c-a0a8-4e47-b9f2-8f2470064721@c1587"
+      ]
+    }
+  }
+}

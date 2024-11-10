@@ -1,0 +1,44 @@
+{
+  "__version__": "1.0.6",
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "borders_fruits"
+      },
+      {
+        "index": 2,
+        "name": "fruits"
+      },
+      {
+        "index": 3,
+        "name": "character"
+      },
+      {
+        "index": 4,
+        "name": "ground"
+      },
+      {
+        "index": 5,
+        "name": "interactive_area"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 1,
+      "1": 4,
+      "2": 30,
+      "3": 36,
+      "4": 4,
+      "5": 8
+    },
+    "allowSleep": true,
+    "gravity": {
+      "y": -50,
+      "z": 0
+    }
+  },
+  "custom_joint_texture_layouts": [],
+  "general": {
+    "highQuality": true
+  }
+}

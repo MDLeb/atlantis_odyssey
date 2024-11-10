@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <title>
+    <%= projectName %>
+  </title>
+
+  <!--http://www.html5rocks.com/en/mobile/mobifying/-->
+  <meta name="viewport"
+    content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1,minimal-ui=true" />
+
+  <!--https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- force webkit on 360 -->
+  <meta name="renderer" content="webkit" />
+  <meta name="force-rendering" content="webkit" />
+  <!-- force edge on IE -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- force full screen on some browser -->
+  <meta name="full-screen" content="yes" />
+  <meta name="x5-fullscreen" content="true" />
+  <meta name="360-fullscreen" content="true" />
+
+  <!--fix fireball/issues/3568 -->
+  <!--<meta name="browsermode" content="application">-->
+  <meta name="x5-page-mode" content="app">
+
+  <!--<link rel="apple-touch-icon" href=".png" />-->
+  <!--<link rel="apple-touch-icon-precomposed" href=".png" />-->
+
+  <link rel="stylesheet" type="text/css" href="<%= cssUrl %>" />
+
+
+</head>
+
+<body>
+  <style>
+    :root {
+      --logo-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='Layer_1' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 257.64 129.13'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %23fff; %7D .cls-2 %7B fill: %23fbae17; %7D %3C/style%3E%3C/defs%3E%3Cg id='logo'%3E%3Cpath class='cls-2' d='m167.21,0c20.51.47,44.83,4.2,68.12,13.39,2.88,1.14,5.68,2.5,8.42,3.93,12.76,6.65,17.54,22.36,10.94,35.25-5.46,10.67-12.65,20.11-20.56,29.02-13.21,14.87-27.92,28.03-44.89,38.49-4.15,2.55-8.6,4.64-13,6.75-9.01,4.31-22.28,2.88-30.64-7.04-6.7-7.96-11.87-16.81-16.13-26.23-6.46-14.26-10.95-29.12-13.17-44.62-1.29-8.98-2.1-18.06-.08-27,2.21-9.8,8.59-16.16,18.16-18.94C143.62.31,153.22-.05,167.21,0Z'/%3E%3Cg%3E%3Cpath class='cls-1' d='m7.73,56.7h13.35v6.72H7.73v10.97H0v-31.09h23.18v6.81H7.73v6.58Z'/%3E%3Cpath class='cls-1' d='m33.92,65.39v9.01h-7.73v-31.09h13.62c7.68,0,12.85,4.21,12.85,10.93,0,4.34-2.24,7.77-5.94,9.65l8,10.51h-9.33l-6.67-9.01h-4.8Zm5.71-6.95c2.97,0,5.35-1.65,5.35-4.21s-2.38-4.11-5.35-4.11h-5.71v8.32h5.71Z'/%3E%3Cpath class='cls-1' d='m64.87,55.7h13.76v6.58h-13.76v5.39h15.77v6.72h-23.5v-31.09h23.5v6.72h-15.77v5.67Z'/%3E%3Cpath class='cls-1' d='m92.3,55.7h13.76v6.58h-13.76v5.39h15.77v6.72h-23.5v-31.09h23.5v6.72h-15.77v5.67Z'/%3E%3C/g%3E%3Cg%3E%3Cpath d='m142.76,43.27c8.09,0,13.17,4.39,13.17,11.38s-5.3,11.79-13.81,11.79h-4.16v7.91h-7.73v-31.09h12.53Zm-.18,16.41c3.43,0,5.62-1.97,5.62-5.03,0-2.79-2.19-4.57-5.62-4.57h-4.62v9.6h4.62Z'/%3E%3Cpath d='m181.75,74.35h-23.09v-31.09h7.73v24.28h15.36v6.81Z'/%3E%3Cpath d='m193.05,69l-2.06,5.35h-8.23l13.21-31.27h7.36l13.17,31.27h-8.18l-2.1-5.35h-13.17Zm6.58-16.92l-4.02,10.33h8.05l-4.02-10.33Z'/%3E%3Cpath d='m230.85,64.98v9.37h-7.77v-9.37l-12.3-21.72h8.55l7.59,13.53,7.63-13.53h8.55l-12.25,21.72Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      --fill: repeating-linear-gradient(90deg,
+          #faef00, #faef00 2px,
+          transparent 0, transparent 28px), linear-gradient(90deg, #f04000, #f8e200);
+    }
+
+    .loader_c {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(ellipse, #7004b7 5%, #100915 87%);
+      z-index: 20;
+    }
+
+    .container {
+      position: absolute;
+      left: 50%;
+      width: 50%;
+      top: 45%;
+      height: 40%;
+      max-height: 80vh;
+      transform: translate(-50%, -50%);
+      background: var(--logo-image) top center/auto 50% no-repeat;
+      background-size: contain;
+    }
+
+    .progress-bar {
+      position: absolute;
+      bottom: -6%;
+      width: 150%;
+      box-sizing: border-box;
+      border: solid 0.1em #230835;
+      height: 0.8em;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 0.4em;
+      background: linear-gradient(180deg, #28083c, #4a0775);
+      font: clamp(0.625em, 10vw, 8em) monospace;
+      box-shadow: 0 0 0.3em 0.05em #b71bff,
+        inset 0 0 0.015em 0.01em #afa4b4;
+    }
+
+    .progress-bar::-webkit-progress-bar {
+      background: transparent;
+    }
+
+    .progress-bar::-webkit-progress-value {
+      border-radius: 0.35em;
+      box-shadow: inset 0 0.1em 0.1em rgba(255, 255, 255, 0.45);
+      background: var(--fill);
+    }
+
+    .progress-bar::-moz-progress-bar {
+      border-radius: 0.35em;
+      box-shadow: inset 0 0.1em 0.1em rgba(255, 255, 255, 0.45);
+      background: var(--fill);
+    }
+
+    .l-text {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      top: 105%;
+      width: 100%;
+      transform: scaleY(0.85);
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+      color: #fff;
+      font-size: 5vw;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .dots {
+      letter-spacing: 0;
+      margin-left: 3px;
+    }
+
+    .dots>span {
+      display: inline-block;
+      width: 1vw;
+      height: 0.55vh;
+      opacity: 0;
+      background: #fff;
+      border-radius: 50%;
+      animation: blink 1.5s infinite backwards;
+      animation-fill-mode: both;
+    }
+
+    .dots>span:nth-child(2) {
+      animation-delay: .2s;
+    }
+
+    .dots>span:nth-child(3) {
+      animation-delay: .4s;
+    }
+
+    @media (orientation: landscape) {
+      .container {
+        top: 40%;
+        height: 50%;
+        background: var(--logo-image) top center/auto 40% no-repeat;
+      }
+
+      .l-text {
+        font-size: 5vh;
+        top: 110%;
+      }
+
+      .dots>span {
+        width: 1vh;
+        height: 0.55vw;
+      }
+
+      .progress-bar {
+        bottom: -15%;
+        width: 85%;
+        font: clamp(0.625em, 6.5vw, 3em) monospace;
+      }
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1
+      }
+
+      99% {
+        opacity: 0
+      }
+
+      100% {
+        opacity: 0
+      }
+    }
+  </style>
+  <div class="loader_c">
+    <div class="container">
+      <progress class="progress-bar" value='10' max='100'></progress>
+      <div class="l-text">
+        <div>LOADING</div>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="GameDiv" cc_exact_fit_screen="true">
+    <div id="Cocos3dGameContainer">
+      <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="99"></canvas>
+    </div>
+  </div>
+  <%- include(cocosTemplate, {}) %>
+</body>
+
+</html>
