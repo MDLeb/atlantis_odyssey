@@ -122,7 +122,7 @@
         "_value": true
       },
       "procedural-animation": {
-        "_value": false
+        "_value": true
       },
       "custom-pipeline-post-process": {
         "_value": false
@@ -154,6 +154,7 @@
       "particle",
       "physics-cannon",
       "primitive",
+      "procedural-animation",
       "profiler",
       "skeletal-animation",
       "tween",

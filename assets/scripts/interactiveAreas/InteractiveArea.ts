@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3, Rect, v2, Intersection2D, Collider, Enum, CCBoolean, Pool, tween, v3, CCFloat, Billboard } from 'cc';
+import { _decorator, Component, Collider, Enum } from 'cc';
 import { gameEventTarget } from '../GameEventTarget';
 import { GameEvent } from '../enums/GameEvent';
 import { CollectableItems } from '../CollectableItems';
@@ -24,7 +24,7 @@ export class InteractiveArea extends Component {
 
 	private _subscribeEvents(isOn: boolean): void {
 		const func: string = isOn ? 'on' : 'off';
-
+		
 		this._collider[func]("onTriggerEnter", this.onTriggerEnter, this);
 		this._collider[func]("onTriggerExit", this.onTriggerExit, this);
 
@@ -35,6 +35,6 @@ export class InteractiveArea extends Component {
 	}
 
 	onTriggerExit() {
-		gameEventTarget.emit(GameEvent.INTERACTION_END, this.itemName)
+		gameEventTarget.emit(GameEvent.INTERACTION_END, this.itemName, this.node)
 	}
 }

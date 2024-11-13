@@ -52,11 +52,12 @@ export class CameraController extends Component {
 
 	update(deltaTime: number) {
 		if (this._cTarget) {
-			const delta = Vec3.subtract(v3(), this._cTarget.worldPosition,
-				this.targetProxy.worldPosition);
-			delta.multiplyScalar(.1);
+			const lerpFactor = Math.min(deltaTime * 5, 1);
+	
+			const delta = Vec3.subtract(v3(), this._cTarget.worldPosition, this.targetProxy.worldPosition);
+			delta.multiplyScalar(lerpFactor);
 			this.targetProxy.worldPosition.add(delta);
-
+	
 			this._positionCamera();
 		}
 	}

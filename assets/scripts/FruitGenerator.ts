@@ -1,8 +1,8 @@
-import { _decorator, CCFloat, CCInteger, Component, instantiate, Node, OctreeInfo, physics, Prefab, Quat, RigidBody, v3, Vec3 } from 'cc';
+import { _decorator, CCBoolean, CCFloat, CCInteger, Component, instantiate, Node, OctreeInfo, physics, Prefab, Quat, RigidBody, Script, tween, v3, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
-import { config } from './test';
-import { Octree } from './octree/Octree'; // Убедитесь, что пути правильные
-import { A3DBoundary } from './octree/A3DBoundary';
+import { configPosOranges } from './configPosOranges';
+import { configPosWatermelon } from './configPosWatermelons';
+import { octree } from 'd3-octree'
 import { Fruit } from './Fruit';
 
 @ccclass('FruitGenerator')
@@ -19,30 +19,50 @@ export class FruitGenerator extends Component {
     @property(CCFloat)
     offset: number = 1;
 
+    @property(CCFloat)
+    step: number = 0.2;
+
+    @property(CCBoolean)
+    useConfig: boolean = false;
+
     private _borders: Node[];
     private _fruits: Node[] = [];
-    private _octree: Octree;
+    private _config: any[];
+    // private _octree: Octree;
 
     protected onEnable(): void {
+        //@ts-ignore
+        // console.log(physics.PhysicsSystem.instance);
+
         const borders = this.node.getChildByName('borders');
         this._borders = borders.children;
+        if (this.useConfig) {
+            switch (this.fruit.name) {
+                case ('orange'):
+                    this._config = configPosOranges;
+                    break;
+                case ('watermelon'):
+                    this._config = configPosWatermelon;
+                    break;
+            }
+        }
     }
 
     protected start(): void {
         const [left, right, top, bottom] = this._borders;
-        const { x: x1 } = left.worldPosition;
-        const { x: x2 } = right.worldPosition;
-        const { z: z1 } = top.worldPosition;
-        const { z: z2 } = bottom.worldPosition;
+        const { x: x1 } = left.position;
+        const { x: x2 } = right.position;
+        const { z: z1 } = top.position;
+        const { z: z2 } = bottom.position;
 
-        const step = 0.5;
+        const { step } = this;
         let fruits = [];
         let oneLayer = [];
 
         for (let j = x1 + this.offset; j < x2 - this.offset; j += step) {
             for (let k = z1 + this.offset; k < z2 - this.offset; k += step) {
-                fruits.push({ x: j, y: 0, z: k });
-                oneLayer.push({ x: j, y: 0, z: k });
+                fruits.push({ x: j, y: step, z: k });
+                oneLayer.push({ x: j, y: step, z: k });
             }
         }
 
@@ -54,16 +74,33 @@ export class FruitGenerator extends Component {
             }
         }
 
-        fruits.forEach(item => {
+        fruits.forEach((item: any, i: number) => {
             const fruit = instantiate(this.fruit);
             this._fruits.push(fruit);
             this.node.addChild(fruit);
+            // fruit.scale = v3(0, 0, 0);
             fruit.getComponentInChildren(Fruit).setCharacter(this.character);
 
 
-            if (config.length) fruit.worldPosition = config.shift() as Vec3;
-            if (config.length) fruit.worldRotation = config.shift() as Quat;
-            fruit.getComponentInChildren(RigidBody).type = physics.ERigidBodyType.DYNAMIC;
+            if (this.useConfig && this._config) {
+                if (this._config.length) fruit.worldPosition = this._config.shift() as Vec3;
+                if (this._config.length) fruit.worldRotation = this._config.shift() as Quat;
+            } else {
+                fruit.position = v3(item.x, item.y, item.z);
+            }
+            // console.log(i * 0.1);
+            const rigidBody = fruit.getComponentInChildren(RigidBody)
+            rigidBody.type = physics.ERigidBodyType.DYNAMIC;
+
+            // tween(fruit)
+            //     .delay(item.y / step * 0.5 - item.z / step * 0.05)
+            //     .to(0.1, { scale: v3(1, 1, 1) }, {
+            //         onComplete: () => {
+            //             physics.PhysicsSystem.instance.syncSceneToPhysics();
+            //         }
+            //     })
+            //     .start();
         });
     }
+
 }

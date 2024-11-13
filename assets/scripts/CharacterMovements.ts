@@ -20,6 +20,8 @@ export class CharacterMovements extends Component {
 	onEnable() {
 		this._subscribeEvents(true);
 		this._animationController = this.node.getComponentInChildren(animation.AnimationController);
+		console.log(this._animationController);
+
 	}
 
 	onDisable() {
@@ -47,6 +49,10 @@ export class CharacterMovements extends Component {
 
 		gameEventTarget[func](GameEvent.JOYSTICK_MOVE, this.onJoystickMove, this);
 		gameEventTarget[func](GameEvent.JOYSTICK_MOVE_END, this.onJoystickMoveEnd, this);
+	}
+
+	onCorrectVelocity() {
+
 	}
 
 	onJoystickMove(cPos: Vec2, delta: Vec2) {

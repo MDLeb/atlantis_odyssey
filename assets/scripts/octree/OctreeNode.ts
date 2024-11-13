@@ -81,50 +81,38 @@ export class OctreeNode {
         this.divided = true;
     }
 
-    // Метод для добавления объекта в октодерево
     insert(object: Node): boolean {
-        // Проверяем, находится ли объект в пределах границ узла
         if (!this.boundary.contains(object)) {
             return false;
         }
 
-        // Если текущий узел не переполнен, добавляем объект в этот узел
         if (this.objects.length < this.capacity) {
             this.objects.push(object);
             return true;
         }
 
-        // Если узел еще не разделен, выполняем разделение
         if (!this.divided) {
             this.subdivide();
         }
 
-        // Вставляем объект в соответствующего дочернего узла
         for (let child of this.children) {
             if (child.insert(object)) {
                 return true;
             }
         }
 
-        // Объект не может быть добавлен ни в один из дочерних узлов (случай маловероятен)
         return false;
     }
 
-    // Метод для поиска объектов в заданном диапазоне
     query(range: A3DBoundary, found: Node[] = []): Node[] {
-        // Проверка на пересечение диапазона с границей узла
         if (!this.boundary.intersects(range)) return found;
         
-        // Перебираем объекты текущего узла и добавляем в результат те, которые находятся в пределах диапазона
         for (const obj of this.objects) {
             if (range.contains(obj)) {
-                console.log('+++');
-                
                 found.push(obj);
             }
         }
 
-        // Рекурсивно вызываем `query` для дочерних узлов, если узел был разделен
         if (this.divided) {
             for (const child of this.children) {
                 child.query(range, found);

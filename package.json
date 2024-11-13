@@ -3,5 +3,8 @@
   "uuid": "16fc5fcb-c664-482f-8d40-79091702b1cb",
   "creator": {
     "version": "3.8.4"
+  },
+  "dependencies": {
+    "d3-octree": "^1.0.2"
   }
 }

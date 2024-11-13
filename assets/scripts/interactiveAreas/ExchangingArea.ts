@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, CCInteger, Component, Enum, Node, Pool } from 'cc';
 import { InteractiveArea } from './InteractiveArea';
 import { CollectableItems } from '../CollectableItems';
 import { GameEvent } from '../enums/GameEvent';
@@ -12,19 +12,27 @@ export class ExchangingArea extends InteractiveArea {
     @property(Bubble)
     bubble: Bubble = null;
 
-    private _orderedCount: number = 10;
-    private _receivedCount: number = 0;
-    private _cashIsReady: boolean = false;
+    @property({ type: Enum(CollectableItems) })
+    itemReceiveName: CollectableItems = CollectableItems.NONE
+
+    @property(CCInteger)
+    itemReceiveCount: number = 0;
+
+    protected _orderedCount: number = 10;
+    protected _receivedCount: number = 0;
+    protected _cashIsReady: boolean = false;
 
     onEnable(): void {
         super.onEnable();
-        this.order(10);
+        this.order(this.itemReceiveCount || 10);
     }
 
     order(count: number = 1) {
         this._orderedCount = count;
         this.bubble.setCounter(count);
     }
+
+    
 
     receive(count: number = 1) {
         this._receivedCount = Math.min(this._orderedCount, this._receivedCount + count);
@@ -43,7 +51,7 @@ export class ExchangingArea extends InteractiveArea {
             this._cashIsReady = false;
         } else {
             const count = this._orderedCount - this._receivedCount;
-            gameEventTarget.emit(GameEvent.INTERACTION_START, this.itemName, true, count, this.node)
+            gameEventTarget.emit(GameEvent.INTERACTION_START, this.itemReceiveName, true, count, this.node)
         }
     }
 }
