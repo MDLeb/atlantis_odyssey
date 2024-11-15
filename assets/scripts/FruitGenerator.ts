@@ -1,9 +1,11 @@
-import { _decorator, CCBoolean, CCFloat, CCInteger, Component, instantiate, Node, OctreeInfo, physics, Prefab, Quat, RigidBody, Script, tween, v3, Vec3 } from 'cc';
+import { _decorator, CCBoolean, CCFloat, CCInteger, Collider, Component, instantiate, Line, MeshRenderer, Node, OctreeInfo, physics, Prefab, Quat, RigidBody, Script, tween, v3, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 import { configPosOranges } from './configPosOranges';
 import { configPosWatermelon } from './configPosWatermelons';
-import { octree } from 'd3-octree'
+// import { octree } from 'd3-octree';
 import { Fruit } from './Fruit';
+import Octree from './octree2/octree';
+
 
 @ccclass('FruitGenerator')
 export class FruitGenerator extends Component {
@@ -27,12 +29,18 @@ export class FruitGenerator extends Component {
 
     private _borders: Node[];
     private _fruits: Node[] = [];
+    private _fruitsComp: Fruit[] = [];
+    private _line: Line;
     private _config: any[];
-    // private _octree: Octree;
+    private _octree: Octree;
+    private _oldOctreeNodes: Set<Node>;
+    private _octreeNodes: Set<Node>;
 
     protected onEnable(): void {
         //@ts-ignore
         // console.log(physics.PhysicsSystem.instance);
+        this._line = this.node.getComponentInChildren(Line);
+        this._octree = new Octree(20, 5);
 
         const borders = this.node.getChildByName('borders');
         this._borders = borders.children;
@@ -79,7 +87,9 @@ export class FruitGenerator extends Component {
             this._fruits.push(fruit);
             this.node.addChild(fruit);
             // fruit.scale = v3(0, 0, 0);
-            fruit.getComponentInChildren(Fruit).setCharacter(this.character);
+            const comp = fruit.getComponentInChildren(Fruit)
+            comp.setCharacter(this.character);
+            this._fruitsComp.push(comp);
 
 
             if (this.useConfig && this._config) {
@@ -101,6 +111,27 @@ export class FruitGenerator extends Component {
             //     })
             //     .start();
         });
+
+        this._octree.build(this._line, this._fruits, (fruit: Node) => {
+            let meshRenderer = fruit.getComponentInChildren(MeshRenderer);
+            if (meshRenderer) {
+                meshRenderer.model.updateWorldBound();
+                return meshRenderer.model.worldBounds;
+            }
+        });
     }
+
+    protected update(): void {
+        // for (let [item] of this._oldOctreeNodes.entries()) {
+        //     item.getComponentInChildren(Fruit).togglePhysics(false);
+        // }
+
+        this._octreeNodes = this._octree.select(this.character.getComponentInChildren(Collider).worldBounds);
+        for (let [item] of this._octreeNodes.entries()) {
+            item.getComponentInChildren(Fruit).togglePhysics(true);
+        }
+        // this._oldOctreeNodes = this._octreeNodes;
+    }
+
 
 }
