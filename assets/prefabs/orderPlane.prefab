@@ -199,7 +199,7 @@
       "__type__": "cc.Vec3",
       "x": -0.185,
       "y": 0.05,
-      "z": -0.244
+      "z": -0.01
     },
     "_lrot": {
       "__type__": "cc.Quat",
@@ -285,7 +285,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "ade8a15a-dcca-4b3c-84c6-f6476ac875bb",
+        "__uuid__": "f1baa237-9cc8-46b8-b539-0540cfe29834",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -389,7 +389,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "ade8a15a-dcca-4b3c-84c6-f6476ac875bb",
+        "__uuid__": "f1baa237-9cc8-46b8-b539-0540cfe29834",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -604,7 +604,7 @@
       "__type__": "cc.Vec3",
       "x": 0.147,
       "y": 0.05,
-      "z": -0.244
+      "z": -0.01
     },
     "_lrot": {
       "__type__": "cc.Quat",
@@ -643,7 +643,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "ade8a15a-dcca-4b3c-84c6-f6476ac875bb",
+        "__uuid__": "f1baa237-9cc8-46b8-b539-0540cfe29834",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -704,6 +704,7 @@
     "progressSprite": {
       "__id__": 3
     },
+    "lookAtCamera": true,
     "_id": ""
   },
   {

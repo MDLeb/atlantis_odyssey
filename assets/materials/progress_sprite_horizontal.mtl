@@ -15,7 +15,9 @@
   "_states": [
     {
       "rasterizerState": {},
-      "depthStencilState": {},
+      "depthStencilState": {
+        "depthWrite": true
+      },
       "blendState": {
         "targets": [
           {}

@@ -22,6 +22,8 @@ export enum GameEvent {
 	INTERACTION_UPGRADE,
 
 	COLLECT_ITEM,//просто собираем на локации (из пустоты)
+	COLLECT_ITEM_SOUND,
+	MAX_ITEMS,
 	COLLECT_MONEY,//забираем деньги
 	SPENT_MONEY,//тратим деньги
 

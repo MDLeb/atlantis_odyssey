@@ -110,7 +110,7 @@ export class ExchangingArea2 extends Component {
 
         this.scheduleOnce(() => {
             this._state = areaStates.PAY;
-        }, 1)
+        }, 0.5)
 
     }
 

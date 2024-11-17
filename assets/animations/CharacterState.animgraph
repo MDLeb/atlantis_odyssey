@@ -257,7 +257,7 @@
       "__id__": 16
     },
     "speed": 2,
-    "speedMultiplier": "",
+    "speedMultiplier": "RunSpeedMultiplier",
     "speedMultiplierEnabled": false,
     "transitionInEventBinding": {
       "__id__": 17

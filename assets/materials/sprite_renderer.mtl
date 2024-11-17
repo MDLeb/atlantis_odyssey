@@ -15,10 +15,18 @@
   "_states": [
     {
       "rasterizerState": {},
-      "depthStencilState": {},
+      "depthStencilState": {
+        "depthWrite": true
+      },
       "blendState": {
+        "isA2C": true,
+        "isIndepend": true,
         "targets": [
-          {}
+          {
+            "blend": false,
+            "blendDst": 9,
+            "blendDstAlpha": 2
+          }
         ]
       }
     }

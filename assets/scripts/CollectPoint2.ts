@@ -41,6 +41,7 @@ export class CollectPoint2 extends Component {
     private _isTweenActive: boolean = false;
     private _characterIsMoving: boolean = false;
     private _itemsLength: number = 0;
+    private _soundPlay: boolean = false;
 
     onEnable() {
         this._subscribeEvents(true);
@@ -93,6 +94,13 @@ export class CollectPoint2 extends Component {
         if (this._isTweenActive || !this._characterIsMoving) return;
         if (this.node.children.length >= this.maxCount) {
             this.maxParticle && this.maxParticle.play();
+            if (!this._soundPlay) {
+                this._soundPlay = true;
+                this.scheduleOnce(() => {
+                    gameEventTarget.emit(GameEvent.MAX_ITEMS);
+                    this._soundPlay = false;
+                }, 1.);
+            }
             return
         }
 
@@ -126,6 +134,7 @@ export class CollectPoint2 extends Component {
                     }
                 },
                 onComplete: () => {
+                    gameEventTarget.emit(GameEvent.COLLECT_ITEM_SOUND);
                     this._isTweenActive = false;
                 }
             })

@@ -79,7 +79,7 @@
       "__id__": 4
     },
     "scaleSpace": 1,
-    "startSize3D": false,
+    "startSize3D": true,
     "startSizeX": {
       "__id__": 5
     },
@@ -191,19 +191,19 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
+    "constant": 2,
+    "multiplier": 1
+  },
+  {
+    "__type__": "cc.CurveRange",
+    "mode": 0,
     "constant": 1,
     "multiplier": 1
   },
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 0,
-    "multiplier": 1
-  },
-  {
-    "__type__": "cc.CurveRange",
-    "mode": 0,
-    "constant": 0,
+    "constant": 1,
     "multiplier": 1
   },
   {

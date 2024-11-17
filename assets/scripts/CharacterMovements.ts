@@ -49,9 +49,6 @@ export class CharacterMovements extends Component {
 		gameEventTarget[func](GameEvent.JOYSTICK_MOVE_END, this.onJoystickMoveEnd, this);
 	}
 
-	onCorrectVelocity() {
-
-	}
 
 	onJoystickMove(cPos: Vec2, delta: Vec2) {
 		this._animationController.setValue('IsMoving', true);
