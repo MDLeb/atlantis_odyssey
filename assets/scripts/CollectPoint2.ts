@@ -61,14 +61,8 @@ export class CollectPoint2 extends Component {
         gameEventTarget[func](GameEvent.JOYSTICK_MOVE, this.onJoystickMove, this);
         gameEventTarget[func](GameEvent.JOYSTICK_MOVE_END, this.onJoystickMoveEnd, this);
 
-        // gameEventTarget[func](GameEvent.RESOURCE_RECEIVE, this.onResourceReceive, this)
         gameEventTarget[func](GameEvent.RESOURCE_EXCHANGE, this.onResourceExchange, this)
     }
-
-    // onResourceReceive(node: Node, orderedresource: CollectableItems) {
-    //     if (orderedresource !== this._resource) return;
-
-    // }
 
     onResourceExchange(node: Node, orderedresource: CollectableItems) {
         if (!this._resourcePool.has(orderedresource)) return;
@@ -163,20 +157,31 @@ export class CollectPoint2 extends Component {
 
             this._itemsLength++;
 
-
+            let startPos: Vec3;
             tween(newResource)
                 .delay(i * 0.1)
                 .to(0.1, { scale: v3(2, 2, 2) }, {
                     onStart: () => {
                         this.node.addChild(newResource);
                         newResource.worldPosition = node.worldPosition;
+                        startPos = newResource.position
                     },
                 })
-                .to(0.2, { scale: v3(1, 1, 1), position: nextPos }, {
+                .to(0.3, { scale: v3(1, 1, 1), position: nextPos }, {
                     onComplete: () => {
                         if (i >= count - 1) {
                             this._isTweenActive = false;
                         }
+                    },
+                    onUpdate: (newResource, ratio) => {
+                        const amplitude = 2;
+                        const offsetY = Math.sin(ratio * Math.PI) * amplitude;
+
+                        newResource.position = v3(
+                            newResource.position.x,
+                            startPos.y + (nextPos.y - startPos.y) * ratio + offsetY,
+                            newResource.position.z
+                        );
                     }
                 })
                 .start();

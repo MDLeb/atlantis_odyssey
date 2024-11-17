@@ -14,23 +14,10 @@ export class MoneyGenerator extends Component {
         this._cashMeshes.forEach((i: Node) => {
             i.scale = v3(0, 0, 0);
         });
-        // this._subscribeEvents(true);
     }
 
-    // onDisable() {
-    //     this._subscribeEvents(false);
-    // }
-
-
-
-    // private _subscribeEvents(isOn: boolean): void {
-    //     const func: string = isOn ? 'on' : 'off';
-
-    //     gameEventTarget[func](GameEvent.EXCHANGE_READY, this.onExchangeReady, this);
-    //     gameEventTarget[func](GameEvent.EXCHANGE_COMPLETE, this.onExchangeComplete, this);
-    // }
-
     onExchangeReady() {
+        gameEventTarget.emit(GameEvent.GENERATE_MONEY_SOUND)
         this._cashMeshes.forEach((i: Node) => {
             tween(i)
                 .to(0.2, { scale: v3(1.1, 1.1, 1.1) })

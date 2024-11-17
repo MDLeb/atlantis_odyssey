@@ -27,7 +27,7 @@ export class CollectPoint extends Component {
 
         return v3(
             column * this._itemSize.x,
-            floor * this._itemSize.y,
+            floor === Infinity ? 0 : floor * this._itemSize.y,
             row * this._itemSize.z
         );
     }

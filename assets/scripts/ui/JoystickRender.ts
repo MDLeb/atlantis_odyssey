@@ -28,12 +28,9 @@ export class JoystickRender extends Component {
 		this._subscribeEvents(false);
 	}
 
-	update(deltaTime: number) {
-		
-	}
 
 	private _subscribeEvents(isOn: boolean) {
-		const func = isOn? 'on': 'off';
+		const func = isOn ? 'on' : 'off';
 
 		gameEventTarget[func](GameEvent.JOYSTICK_MOVE_START, this.onJoystickMoveStart, this);
 		gameEventTarget[func](GameEvent.JOYSTICK_MOVE_END, this.onJoystickMoveEnd, this);
@@ -43,7 +40,7 @@ export class JoystickRender extends Component {
 	onJoystickMoveStart(startPos: Vec2) {
 		this._isActive = true;
 		this.getComponent(UIOpacity).opacity = 255;
-
+		if (!startPos) return;
 		const startWorldPos = this.uiCamera.screenToWorld(v3(startPos.x, startPos.y, 0));
 		this.node.worldPosition = startWorldPos;
 		this.innerCircle.setPosition(v3());
@@ -58,13 +55,19 @@ export class JoystickRender extends Component {
 		if (this._isActive) {
 			const cJoystickWorldPos = this.uiCamera.screenToWorld(v3(cJoystickPos.x,
 				cJoystickPos.y, 0));
-			
+
 			const delta = Vec3.subtract(v3(), cJoystickWorldPos, this.node.worldPosition);
 			const radius = Math.min(this.maxRadius, delta.length());
 			delta.normalize();
 			const offset = delta.multiplyScalar(radius);
 
 			this.innerCircle.position = offset;
+		}
+	}
+
+	update(deltaTime: number) {
+		if (this._isActive) {
+			gameEventTarget.emit(GameEvent.TOGGLE_TUTOR_HAND, false);
 		}
 	}
 }

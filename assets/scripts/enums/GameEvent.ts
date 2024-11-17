@@ -24,6 +24,7 @@ export enum GameEvent {
 	COLLECT_ITEM,//просто собираем на локации (из пустоты)
 	COLLECT_ITEM_SOUND,
 	MAX_ITEMS,
+	GENERATE_MONEY_SOUND,
 	COLLECT_MONEY,//забираем деньги
 	SPENT_MONEY,//тратим деньги
 

@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, Component, Enum, Node, Pool, tween, v3 } from 'cc';
+import { _decorator, CCInteger, Component, Enum, Node, Pool, tween, v3, Vec3 } from 'cc';
 import { GameEvent } from '../enums/GameEvent';
 import { gameEventTarget } from '../GameEventTarget';
 import { CollectPoint } from '../CollectPoint';
@@ -69,7 +69,7 @@ export class ExchangingArea2 extends Component {
 
         if (this._state === areaStates.PAY) {
             gameEventTarget.emit(GameEvent.COLLECT_MONEY, this._count, this.collectPoint.node);
-            this._state = areaStates.NONE //???
+            this._state = areaStates.NONE
             this._onExchangeComplete();
         }
     }
@@ -81,10 +81,33 @@ export class ExchangingArea2 extends Component {
         this.collectPoint.setItemSize(resourceNode.getComponentInChildren(ResourseSize).getSize());
 
         cb && cb();
+
+        let startPos: Vec3 = resourceNode.worldPosition.clone();
+        let nextPos: Vec3 = this.collectPoint.getNextPosition();
+
+        if (this._orderedResource === CollectableItems.MONEY) {
+            gameEventTarget.emit(GameEvent.SPENT_MONEY);
+        }
+
         tween(resourceNode)
-            .to(0.2, { position: this.collectPoint.getNextPosition() }, {
-                onComplete: () => {
+            .to(0.05, { scale: v3(1.2, 1.2, 1.2) }, {
+                onStart: () => {
                     this.collectPoint.node.addChild(resourceNode);
+                    resourceNode.worldPosition = startPos;
+                },
+            })
+            .to(0.1, { scale: v3(1, 1, 1), position: nextPos }, {
+                onUpdate: (newResource, ratio) => {
+                    const amplitude = 2;
+                    const offsetY = Math.sin(ratio * Math.PI) * amplitude;
+
+                    newResource.position = v3(
+                        newResource.position.x,
+                        startPos.y + (nextPos.y - startPos.y) * ratio + offsetY,
+                        newResource.position.z
+                    );
+                },
+                onComplete: () => {
                     this.bubbleCounter.setCounter(this.collectPoint.node.children.length, this._count)
                     this._isTweenActive = false;
 
@@ -120,7 +143,7 @@ export class ExchangingArea2 extends Component {
 
         this.scheduleOnce(() => {
             this._state = areaStates.RECEIVE;
-            
+
             this.bubbleCounter.toggle(true);
         }, 1.5)
     }

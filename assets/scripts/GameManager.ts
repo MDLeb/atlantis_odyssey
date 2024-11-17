@@ -1,7 +1,9 @@
-import { _decorator, CCFloat, Component, Node } from 'cc';
+import { _decorator, CCFloat, Component, Node, view, screen, Camera } from 'cc';
 import { GameEvent } from './enums/GameEvent';
 import { gameEventTarget } from './GameEventTarget';
 import { CTAButton } from './input/CTAButton';
+import { ScreenButton } from './input/ScreenButton';
+import { CameraController } from './CameraController';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
@@ -10,16 +12,12 @@ export class GameManager extends Component {
     @property(CTAButton)
     ctaButton: CTAButton = null;
 
-    @property(Node)
-    tutorial: Node = null;
-
-    @property(CCFloat)
-    tutorialTime: number = 2;
-
-    private _tutorTimer: number = 0;
+    @property(ScreenButton)
+    joystick: ScreenButton = null;
 
     onEnable() {
         this._subscribeEvents(true);
+        this._onCanvasResize();
     }
 
     onDisable() {
@@ -29,26 +27,23 @@ export class GameManager extends Component {
     private _subscribeEvents(isOn: boolean): void {
         const func: string = isOn ? 'on' : 'off';
 
-        gameEventTarget[func](GameEvent.JOYSTICK_MOVE, this.onJoystickMove, this);
         gameEventTarget[func](GameEvent.INTERACTION_UPGRADE, this.onInteractionUpgrade, this);
-    }
+        view[func]('canvas-resize', this._onCanvasResize, this);
 
-    onJoystickMove() {
-        this.tutorial.active = false;
-        this._tutorTimer = 0;
     }
 
     onInteractionUpgrade() {
+        this.joystick.enabled = false;
         this.ctaButton.enabled = true
     }
 
-    protected update(dt: number): void {
-        if(!this.tutorial.active){
-            this._tutorTimer += dt;
-            if(this._tutorTimer >= this.tutorialTime){
-                this.tutorial.active = true;
-            }
-        }
+    _onCanvasResize() {
+        const { height, width } = screen.windowSize
+        const aspect = width / height;
+        const landscape = aspect > 1;
+        gameEventTarget.emit(GameEvent.CAMERA_TRANSITION, landscape ? 1 : 0);
+
+
     }
 
 

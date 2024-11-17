@@ -3,19 +3,16 @@
   "splash-setting": {
     "background": {
       "type": "color",
-      "image": "project://settings/bg.png",
       "color": {
-        "x": 0,
+        "x": 0.054901960784313725,
         "y": 0,
-        "z": 0,
+        "z": 0.09411764705882353,
         "w": 1
       }
     },
     "logo": {
-      "type": "custom",
-      "image": "project://settings/logo.png"
-    },
-    "displayRatio": 1,
-    "totalTime": 1000
+      "image": "project://settings/logo_2.png",
+      "type": "custom"
+    }
   }
 }
