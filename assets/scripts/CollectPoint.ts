@@ -5,9 +5,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('CollectPoint')
 export class CollectPoint extends Component {
-    @property(Vec3)
-    itemSize: Vec3 = v3(1, 1, 1);
-
     @property(CCInteger)
     rows: number = 1;
 
@@ -15,20 +12,11 @@ export class CollectPoint extends Component {
     columns: number = 1;
 
     protected _tempResource: Map<Node, Pool<Node>> = new Map();
+    protected _itemSize: Vec3 = v3(1, 1, 1);
 
-    protected onEnable(): void {
-        this._subscribeEvents(true)
+    setItemSize(itemSize: Vec3) {
+        this._itemSize = itemSize
     }
-    protected onDisable(): void {
-        this._subscribeEvents(false)
-
-    }
-    private _subscribeEvents(isOn: boolean) {
-		const func = isOn ? 'on' : 'off';
-
-		gameEventTarget[func](GameEvent.EXCHANGE_READY, this.onExchangeReady, this);
-	}
-
 
     getNextPosition(): Vec3 {
         const index = this.node.children.length;
@@ -38,23 +26,9 @@ export class CollectPoint extends Component {
         const column = index % this.columns;
 
         return v3(
-            column * this.itemSize.x,
-            floor * this.itemSize.y,
-            row * this.itemSize.z
+            column * this._itemSize.x,
+            floor * this._itemSize.y,
+            row * this._itemSize.z
         );
-    }
-
-    setTempResource(node: Node, pool: Pool<Node>) {
-        this._tempResource.set(node, pool);
-    }
-
-    onExchangeReady(parentNode: Node) {
-        if(this.node.parent !== parentNode) return;
-        
-        
-        for (let [node, pool] of this._tempResource) {
-            this.node.removeChild(node)
-            pool.free(node);
-        }
     }
 }

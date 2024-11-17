@@ -14,24 +14,23 @@ export class MoneyGenerator extends Component {
         this._cashMeshes.forEach((i: Node) => {
             i.scale = v3(0, 0, 0);
         });
-        this._subscribeEvents(true);
+        // this._subscribeEvents(true);
     }
 
-    onDisable() {
-        this._subscribeEvents(false);
-    }
+    // onDisable() {
+    //     this._subscribeEvents(false);
+    // }
 
 
 
-    private _subscribeEvents(isOn: boolean): void {
-        const func: string = isOn ? 'on' : 'off';
+    // private _subscribeEvents(isOn: boolean): void {
+    //     const func: string = isOn ? 'on' : 'off';
 
-        gameEventTarget[func](GameEvent.EXCHANGE_READY, this.onExchangeReady, this);
-        gameEventTarget[func](GameEvent.EXCHANGE_COMPLETE, this.onExchangeComplete, this);
-    }
+    //     gameEventTarget[func](GameEvent.EXCHANGE_READY, this.onExchangeReady, this);
+    //     gameEventTarget[func](GameEvent.EXCHANGE_COMPLETE, this.onExchangeComplete, this);
+    // }
 
-    onExchangeReady(node: Node) {
-        if (this.node.parent !== node) return;
+    onExchangeReady() {
         this._cashMeshes.forEach((i: Node) => {
             tween(i)
                 .to(0.2, { scale: v3(1.1, 1.1, 1.1) })
@@ -39,8 +38,7 @@ export class MoneyGenerator extends Component {
                 .start()
         });
     }
-    onExchangeComplete(node: Node) {
-        if (this.node.parent !== node) return;
+    onExchangeComplete() {
         this._cashMeshes.forEach((i: Node) => {
             tween(i)
                 .to(0.3, { scale: v3(0, 0, 0) })

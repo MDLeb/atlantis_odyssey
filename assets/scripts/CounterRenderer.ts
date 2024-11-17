@@ -25,7 +25,7 @@ export class CounterRenderer extends Component {
     @property(SpriteRenderer)
     number1: SpriteRenderer = null;
 
-    private _count: number = 0;
+    private _count: number = 10;
 
     setCount(count: number) {
         this._count = count;

@@ -4,8 +4,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Fruit')
 export class Fruit extends Component {
-    // @property()
-    // maxTime = 0.3;
+    
 
     private _rigidBody: RigidBody = null;
     private _collider: Collider = null;
@@ -13,7 +12,7 @@ export class Fruit extends Component {
     private _character: Node;
     private _checkDistance = 1;
     private _mask: number;
-    
+
     private _meshHelperDynamic: Node;
     private _meshHelperStatic: Node;
 
@@ -40,6 +39,7 @@ export class Fruit extends Component {
         this._collider.enabled = true;
     }
 
+  
     setCharacter(character: Node) {
         this._character = character;
     }
@@ -52,22 +52,34 @@ export class Fruit extends Component {
             if (this._character) {
                 dist = Vec3.distance(this._character.worldPosition, this.node.worldPosition);
             }
-            if (dist > this._checkDistance) {
-                this._meshHelperDynamic.active = false;
-                this._meshHelperStatic.active = true;
+            const vel = v3();
+            this._rigidBody.getLinearVelocity(vel)
+            if (dist > this._checkDistance && vel.length() < 0.1) {
+                // this._meshHelperDynamic.active = false;
+                // this._meshHelperStatic.active = true;
                 this._rigidBody.type = physics.ERigidBodyType.STATIC;
             } else {
-                this._meshHelperDynamic.active = true;
-                this._meshHelperStatic.active = false;
+                // this._meshHelperDynamic.active = true;
+                // this._meshHelperStatic.active = false;
                 this._rigidBody.type = physics.ERigidBodyType.DYNAMIC;
             }
             isOn && this.unscheduleAllCallbacks();
             this.scheduleOnce(() => {
-                this.togglePhysics(false);
-                this._meshHelperDynamic.active = false;
-                this._meshHelperStatic.active = false;
-            }, 0.5);
+                this.togglePhysics(vel.length() > 0.1);
+                // this._meshHelperDynamic.active = false;
+                // this._meshHelperStatic.active = false;
+            }, 1.2);
         }
+    }
+    _velocity: Vec3 = v3();
+    protected update(dt: number): void {
+        if (!this._character) return;
+
+        const dist = Vec3.distance(this._character.worldPosition, this.node.worldPosition);
+        this.togglePhysics(dist < this._checkDistance + 2);
+
+
+
     }
 }
 

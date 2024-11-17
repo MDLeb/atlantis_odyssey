@@ -34,7 +34,7 @@
     },
     "allowSleep": true,
     "gravity": {
-      "y": -50,
+      "y": -10,
       "z": 0
     }
   },

@@ -4,7 +4,7 @@ import { configPosOranges } from './configPosOranges';
 import { configPosWatermelon } from './configPosWatermelons';
 // import { octree } from 'd3-octree';
 import { Fruit } from './Fruit';
-import Octree from './octree2/octree';
+import Octree from './octree/octree';
 
 
 @ccclass('FruitGenerator')
@@ -40,7 +40,7 @@ export class FruitGenerator extends Component {
         //@ts-ignore
         // console.log(physics.PhysicsSystem.instance);
         this._line = this.node.getComponentInChildren(Line);
-        this._octree = new Octree(20, 5);
+        this._octree = new Octree(100, 8);
 
         const borders = this.node.getChildByName('borders');
         this._borders = borders.children;
@@ -100,7 +100,7 @@ export class FruitGenerator extends Component {
             }
             // console.log(i * 0.1);
             const rigidBody = fruit.getComponentInChildren(RigidBody)
-            rigidBody.type = physics.ERigidBodyType.DYNAMIC;
+            rigidBody.type = physics.ERigidBodyType.STATIC;
 
             // tween(fruit)
             //     .delay(item.y / step * 0.5 - item.z / step * 0.05)
@@ -126,10 +126,10 @@ export class FruitGenerator extends Component {
         //     item.getComponentInChildren(Fruit).togglePhysics(false);
         // }
 
-        this._octreeNodes = this._octree.select(this.character.getComponentInChildren(Collider).worldBounds);
-        for (let [item] of this._octreeNodes.entries()) {
-            item.getComponentInChildren(Fruit).togglePhysics(true);
-        }
+        // this._octreeNodes = this._octree.select(this.character.getComponentInChildren(Collider).worldBounds);
+        // for (let [item] of this._octreeNodes.entries()) {
+        //     item.getComponentInChildren(Fruit).togglePhysics(true);
+        // }
         // this._oldOctreeNodes = this._octreeNodes;
     }
 

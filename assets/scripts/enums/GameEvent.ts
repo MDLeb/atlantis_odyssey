@@ -15,14 +15,18 @@ export enum GameEvent {
 	JOYSTICK_MOVE_END,
 
 	CORRECT_VELOCITY,
-	
+
 	INTERACTION_START,
+	INTERACTION,
 	INTERACTION_END,
 
-	EXCHANGE_READY,
-	EXCHANGE_COMPLETE,
-	MONEY_RECEIVE,
-	MONEY_SPEND
+	COLLECT_ITEM,//просто собираем на локации (из пустоты)
+	COLLECT_MONEY,//забираем деньги
+	SPENT_MONEY,//тратим деньги
+
+	RESOURCE_RECEIVE,//нода отдала чайлдов, принимаем на другой
+	RESOURCE_EXCHANGE, //когда готовы забирать с одной ноды и перекладывать в другую
+
 
 
 }

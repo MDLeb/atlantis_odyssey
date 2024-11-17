@@ -8,23 +8,23 @@ import { ExchangingArea } from './interactiveAreas/ExchangingArea';
 const { ccclass, property } = _decorator;
 
 
-@ccclass('CollectableMap')
-class CollectableMap {
-	@property({ type: Enum(CollectableItems) })
-	itemName: CollectableItems = CollectableItems.NONE
+// @ccclass('CollectableMap')
+// class CollectableMap {
+// 	@property({ type: Enum(CollectableItems) })
+// 	itemName: CollectableItems = CollectableItems.NONE
 
-	@property(Prefab)
-	prefab: Prefab
+// 	@property(Prefab)
+// 	prefab: Prefab
 
-	currentCollection: Node[] = [];
-}
+// 	currentCollection: Node[] = [];
+// }
 
 
 @ccclass('CharacterCollector')
 export class CharacterCollector extends Component {
 
-	@property([CollectableMap])
-	collectableMap: CollectableMap[] = []
+	// @property([CollectableMap])
+	// collectableMap: CollectableMap[] = []
 
 	@property(CCBoolean)
 	isAnimationControlPoint: boolean = false;
@@ -42,141 +42,141 @@ export class CharacterCollector extends Component {
 	private _collectPoint: CollectPoint = null;
 
 
-	onEnable() {
-		this._subscribeEvents(true);
-		this._collectPoint = this.node.getComponent(CollectPoint);
-	}
+	// onEnable() {
+	// 	this._subscribeEvents(true);
+	// 	this._collectPoint = this.node.getComponent(CollectPoint);
+	// }
 
-	onDisable() {
-		this._subscribeEvents(false);
-	}
-
-
-	private _subscribeEvents(isOn: boolean) {
-		const func = isOn ? 'on' : 'off';
-
-		gameEventTarget[func](GameEvent.INTERACTION_START, this.onInteractionStart, this);
-		gameEventTarget[func](GameEvent.INTERACTION_END, this.onInteractionEnd, this);
-	}
+	// onDisable() {
+	// 	this._subscribeEvents(false);
+	// }
 
 
-	onInteractionStart(item: CollectableItems, isExchanger: boolean, count: number, interactiveNode: Node) {
-		this._resource = item;
-		this._activeInteractionNode = interactiveNode;
+	// private _subscribeEvents(isOn: boolean) {
+	// 	const func = isOn ? 'on' : 'off';
 
-		if (isExchanger) {
-			this.resourceExchanging(count, interactiveNode);
-		} else {
-			this.resourceCollecting(count, interactiveNode);
-		}
-	}
+	// 	gameEventTarget[func](GameEvent.INTERACTION_START, this.onInteractionStart, this);
+	// 	gameEventTarget[func](GameEvent.INTERACTION_END, this.onInteractionEnd, this);
+	// }
 
-	onInteractionEnd(item: CollectableItems, node: Node) {
-		this._resource = null;
-		if (this._activeInteractionNode === node) {
-			this._activeInteractionNode = null;
-		}
-	}
 
-	resourceExchanging(count: number, interactiveNode: Node) {
-		if (count === 0) return;
-		const source = this.collectableMap.find(i => i.itemName === this._resource);
-		if (!source) return;
-		if (!this.node.children.length) return;
+	// onInteractionStart(item: CollectableItems, isExchanger: boolean, count: number, interactiveNode: Node) {
+	// 	this._resource = item;
+	// 	this._activeInteractionNode = interactiveNode;
 
-		const pool = this._resourcePool.get(this._resource);
-		const lastResource = this.node.children[this.node.children.length - 1];
+	// 	if (isExchanger) {
+	// 		this.resourceExchanging(count, interactiveNode);
+	// 	} else {
+	// 		this.resourceCollecting(count, interactiveNode);
+	// 	}
+	// }
 
-		const prevPos = lastResource.worldPosition.clone();
-		const nextPos = this._activeInteractionNode.getComponentInChildren(CollectPoint);;
+	// onInteractionEnd(item: CollectableItems, node: Node) {
+	// 	this._resource = null;
+	// 	if (this._activeInteractionNode === node) {
+	// 		this._activeInteractionNode = null;
+	// 	}
+	// }
 
-		nextPos.node.addChild(lastResource);
-		nextPos.setTempResource(lastResource, pool);
-		lastResource.worldPosition = prevPos;
-		const { x, y, z } = nextPos.getNextPosition();
+	// resourceExchanging(count: number, interactiveNode: Node) {
+	// 	if (count === 0) return;
+	// 	const source = this.collectableMap.find(i => i.itemName === this._resource);
+	// 	if (!source) return;
+	// 	if (!this.node.children.length) return;
 
-		tween(lastResource.position)
-			.to(0.3, { x, z }, {
-				onUpdate: (target, ratio) => {
-					const yOffset = Math.sin(ratio * Math.PI) * 1;
-					// Обновляем позицию Y, добавляя смещение только вверх
-					lastResource.position = v3(target.x, prevPos.y + yOffset + (y - prevPos.y) * ratio, target.z);
-				},
-				onStart: () => {
-					// pool.free(lastResource);
-					this.scheduleOnce(() => {
-						if (this._activeInteractionNode) {
-							const exchangingArea = this._activeInteractionNode.getComponent(ExchangingArea)
-							exchangingArea.receive(1);
-						}
-						if (this._resource === CollectableItems.MONEY) {
-							gameEventTarget.emit(GameEvent.MONEY_SPEND)
-						}
-						if (this.isAnimationControlPoint && this.node.children.length === 0) {
-							this.animationController.setValue('IsKeeping', false);
-						}
-						this.resourceExchanging(count - 1, interactiveNode);
-					}, 0.1)
+	// 	const pool = this._resourcePool.get(this._resource);
+	// 	const lastResource = this.node.children[this.node.children.length - 1];
 
-				}
-			})
-			.start();
-	}
+	// 	const prevPos = lastResource.worldPosition.clone();
+	// 	const nextPos = this._activeInteractionNode.getComponentInChildren(CollectPoint);;
 
-	resourceCollecting(count: number, interactiveNode: Node, stopRecursive: boolean = false, delay: number = 0) {
-		if (!this._resource || count <= 0) return;
-		const source = this.collectableMap.find(i => i.itemName === this._resource);
-		if (!source) return;
-		const { prefab, itemName } = source;
+	// 	nextPos.node.addChild(lastResource);
+	// 	nextPos.setTempResource(lastResource, pool);
+	// 	lastResource.worldPosition = prevPos;
+	// 	const { x, y, z } = nextPos.getNextPosition();
 
-		// if (interactiveNode !== this._activeInteractionNode && itemName !== CollectableItems.MONEY) return;
-		//если собираем деньги, то разово при заходе в зону и все доступные
-		if (this._resource === CollectableItems.MONEY && !stopRecursive) {
-			for (let i = 0; i < count; i++) {
-				this.scheduleOnce(() => {
-					this.resourceCollecting(1, interactiveNode, true, i * 0.05);
-				})
-			}
-			return;
-		}
+	// 	tween(lastResource.position)
+	// 		.to(0.3, { x, z }, {
+	// 			onUpdate: (target, ratio) => {
+	// 				const yOffset = Math.sin(ratio * Math.PI) * 1;
+	// 				// Обновляем позицию Y, добавляя смещение только вверх
+	// 				lastResource.position = v3(target.x, prevPos.y + yOffset + (y - prevPos.y) * ratio, target.z);
+	// 			},
+	// 			onStart: () => {
+	// 				// pool.free(lastResource);
+	// 				this.scheduleOnce(() => {
+	// 					if (this._activeInteractionNode) {
+	// 						const exchangingArea = this._activeInteractionNode.getComponent(ExchangingArea)
+	// 						exchangingArea.receive(1);
+	// 					}
+	// 					if (this._resource === CollectableItems.MONEY) {
+	// 						gameEventTarget.emit(GameEvent.MONEY_SPEND)
+	// 					}
+	// 					if (this.isAnimationControlPoint && this.node.children.length === 0) {
+	// 						this.animationController.setValue('IsKeeping', false);
+	// 					}
+	// 					this.resourceExchanging(count - 1, interactiveNode);
+	// 				}, 0.1)
 
-		//если пул для текущего ресурса еще не создан в мапе
-		if (!this._resourcePool.has(this._resource)) {
-			this._resourcePool.set(this._resource, new Pool<Node>(() => {
-				return instantiate(prefab);
-			}, 5))
-		}
+	// 			}
+	// 		})
+	// 		.start();
+	// }
 
-		const pool = this._resourcePool.get(this._resource);
-		const newResource = pool.alloc();
+	// resourceCollecting(count: number, interactiveNode: Node, stopRecursive: boolean = false, delay: number = 0) {
+	// 	if (!this._resource || count <= 0) return;
+	// 	const source = this.collectableMap.find(i => i.itemName === this._resource);
+	// 	if (!source) return;
+	// 	const { prefab, itemName } = source;
 
-		this.node.addChild(newResource);
-		const prevCollectPoint = this._activeInteractionNode.getComponentInChildren(CollectPoint);
-		const nextPos = this._collectPoint.getNextPosition();
+	// 	// if (interactiveNode !== this._activeInteractionNode && itemName !== CollectableItems.MONEY) return;
+	// 	//если собираем деньги, то разово при заходе в зону и все доступные
+	// 	if (this._resource === CollectableItems.MONEY && !stopRecursive) {
+	// 		for (let i = 0; i < count; i++) {
+	// 			this.scheduleOnce(() => {
+	// 				this.resourceCollecting(1, interactiveNode, true, i * 0.05);
+	// 			})
+	// 		}
+	// 		return;
+	// 	}
 
-		if (prevCollectPoint) {
-			newResource.worldPosition = prevCollectPoint.node.worldPosition;
-		} else {
-			newResource.position = nextPos;
-		}
+	// 	//если пул для текущего ресурса еще не создан в мапе
+	// 	if (!this._resourcePool.has(this._resource)) {
+	// 		this._resourcePool.set(this._resource, new Pool<Node>(() => {
+	// 			return instantiate(prefab);
+	// 		}, 5))
+	// 	}
 
-		tween(newResource)
-			.delay(delay)
-			.to(0.2, { scale: v3(2, 2, 2), position: nextPos }, {
-				onComplete: () => {
-					// Tween.stopAllByTarget(newResource);
-					if (this.isAnimationControlPoint) {
-						this.animationController.setValue('IsKeeping', true)
-					}
-					if (itemName === CollectableItems.MONEY) {
-						gameEventTarget.emit(GameEvent.MONEY_RECEIVE)
-					}
-					this.resourceCollecting(count - 1, interactiveNode);
-				}
-			})
-			.to(0.1, { scale: v3(1, 1, 1) })
-			.start();
-	}
+	// 	const pool = this._resourcePool.get(this._resource);
+	// 	const newResource = pool.alloc();
+
+	// 	this.node.addChild(newResource);
+	// 	const prevCollectPoint = this._activeInteractionNode.getComponentInChildren(CollectPoint);
+	// 	const nextPos = this._collectPoint.getNextPosition();
+
+	// 	if (prevCollectPoint) {
+	// 		newResource.worldPosition = prevCollectPoint.node.worldPosition;
+	// 	} else {
+	// 		newResource.position = nextPos;
+	// 	}
+
+	// 	tween(newResource)
+	// 		.delay(delay)
+	// 		.to(0.2, { scale: v3(2, 2, 2), position: nextPos }, {
+	// 			onComplete: () => {
+	// 				// Tween.stopAllByTarget(newResource);
+	// 				if (this.isAnimationControlPoint) {
+	// 					this.animationController.setValue('IsKeeping', true)
+	// 				}
+	// 				if (itemName === CollectableItems.MONEY) {
+	// 					gameEventTarget.emit(GameEvent.MONEY_RECEIVE)
+	// 				}
+	// 				this.resourceCollecting(count - 1, interactiveNode);
+	// 			}
+	// 		})
+	// 		.to(0.1, { scale: v3(1, 1, 1) })
+	// 		.start();
+	// }
 
 }
 
