@@ -23,10 +23,6 @@
     "Unity": {
       "body": "<script>window.apiName='Unity';if(mraid.getState()==='loading'){mraid.addEventListener('ready',onSdkReady)}else{onSdkReady()}function viewableChangeHandler(viewable){if(viewable){cc.game.run()}else{cc.game.pause()}}function onSdkReady(){mraid.addEventListener('viewableChange',viewableChangeHandler);if(mraid.isViewable()){showMyAd()}}var url='https://apps.apple.com/us/app/atlantis-odyssey/id1496612433';var android='https://play.google.com/store/apps/details?id=com.vizorapps.atlantis&hl=en';if(/android/i.test(navigator.userAgent)){url=android}function showMyAd(){cc.game.run()}function AdRedirectProcessing(){mraid.open(url)}</script>",
         "sdkScript": "<script src=\"./mraid.js\"></script>"
-    },
-    "LoaderScript": {
-      "body": "<script>const onDOMReady=()=>{const progress=document.querySelector('.progress-bar');const timeStamp=Date.now();const dProgress=0.06;const increaseProgress=()=>{const dt=Date.now()-timeStamp;progress.value=dt*dProgress+10;if(progress.value<100){requestAnimationFrame(increaseProgress);}};requestAnimationFrame(increaseProgress);};document.addEventListener('DOMContentLoaded', onDOMReady);</script>"
     }
-
   }
 }
