@@ -1,4 +1,4 @@
-import { _decorator, CCBoolean, CCFloat, CCInteger, Collider, Component, instantiate, Line, MeshRenderer, Node, OctreeInfo, physics, Prefab, Quat, RigidBody, Script, tween, v3, Vec3 } from 'cc';
+import { _decorator, CCBoolean, CCFloat, CCInteger, Collider, Component, instantiate, Line, MeshRenderer, Node, OctreeInfo, ParticleSystem, physics, Prefab, Quat, RigidBody, Script, tween, v3, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 import { configPosOranges } from './configPosOranges';
 import { configPosWatermelon } from './configPosWatermelons';
@@ -27,21 +27,27 @@ export class FruitGenerator extends Component {
     @property(CCBoolean)
     useConfig: boolean = false;
 
+    @property(CCBoolean)
+    useAnimation: boolean = false;
+
+
     private _borders: Node[];
     private _fruits: Node[] = [];
     private _fruitsComp: Fruit[] = [];
     private _line: Line;
     private _config: any[];
+    private _particle: ParticleSystem;
     private _octree: Octree;
-    private _oldOctreeNodes: Set<Node>;
-    private _octreeNodes: Set<Node>;
+    // private _oldOctreeNodes: Set<Node>;
+    // private _octreeNodes: Set<Node>;
 
     protected onEnable(): void {
         //@ts-ignore
         // console.log(physics.PhysicsSystem.instance);
-        this._line = this.node.getComponentInChildren(Line);
-        this._octree = new Octree(100, 8);
+        // this._line = this.node.getComponentInChildren(Line);
+        // this._octree = new Octree(100, 8);
 
+        this._particle = this.node.getComponentInChildren(ParticleSystem);
         const borders = this.node.getChildByName('borders');
         this._borders = borders.children;
         if (this.useConfig) {
@@ -86,39 +92,54 @@ export class FruitGenerator extends Component {
             const fruit = instantiate(this.fruit);
             this._fruits.push(fruit);
             this.node.addChild(fruit);
-            // fruit.scale = v3(0, 0, 0);
+
             const comp = fruit.getComponentInChildren(Fruit)
             comp.setCharacter(this.character);
             this._fruitsComp.push(comp);
 
+            const rigidBody = fruit.getComponentInChildren(RigidBody)
+            rigidBody.type = physics.ERigidBodyType.STATIC;
 
             if (this.useConfig && this._config) {
                 if (this._config.length) fruit.worldPosition = this._config.shift() as Vec3;
                 if (this._config.length) fruit.worldRotation = this._config.shift() as Quat;
             } else {
-                fruit.position = v3(item.x, item.y, item.z);
+                const r = v3(
+                    Math.random() * 0.001,
+                    Math.random() * 0.001,
+                    Math.random() * 0.001,
+                )
+                fruit.position = v3(item.x, item.y, item.z)
+                    .add(r);
             }
-            // console.log(i * 0.1);
-            const rigidBody = fruit.getComponentInChildren(RigidBody)
-            rigidBody.type = physics.ERigidBodyType.STATIC;
 
-            // tween(fruit)
-            //     .delay(item.y / step * 0.5 - item.z / step * 0.05)
-            //     .to(0.1, { scale: v3(1, 1, 1) }, {
-            //         onComplete: () => {
-            //             physics.PhysicsSystem.instance.syncSceneToPhysics();
-            //         }
-            //     })
-            //     .start();
+            if (this.useAnimation) {
+                fruit.children[0].scale = v3(0, 0, 0);
+
+                this._particle && this._particle.play();
+                tween(fruit.children[0])
+                    .delay((z2 - item.z) * 0.1)
+                    .to(0.2, { scale: v3(2, 2, 2) })
+                    .to(0.1, { scale: v3(1, 1, 1) }, {
+                        onComplete: () => {
+                            rigidBody.type = physics.ERigidBodyType.DYNAMIC;
+                        }
+                    })
+                    .start();
+            } else {
+                rigidBody.type = physics.ERigidBodyType.DYNAMIC;
+            }
+
+
         });
 
-        this._octree.build(this._line, this._fruits, (fruit: Node) => {
-            let meshRenderer = fruit.getComponentInChildren(MeshRenderer);
-            if (meshRenderer) {
-                meshRenderer.model.updateWorldBound();
-                return meshRenderer.model.worldBounds;
-            }
-        });
+        // this._octree.build(this._line, this._fruits, (fruit: Node) => {
+        //     let meshRenderer = fruit.getComponentInChildren(MeshRenderer);
+        //     if (meshRenderer) {
+        //         meshRenderer.model.updateWorldBound();
+        //         return meshRenderer.model.worldBounds;
+        //     }
+        // });
     }
 
     protected update(): void {

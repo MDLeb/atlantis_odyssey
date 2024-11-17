@@ -4,33 +4,36 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Fruit')
 export class Fruit extends Component {
-    
+
 
     private _rigidBody: RigidBody = null;
     private _collider: Collider = null;
     private _time: number = 0;
     private _character: Node;
     private _checkDistance = 1;
-    private _mask: number;
+    // private _mask: number;
 
-    private _meshHelperDynamic: Node;
-    private _meshHelperStatic: Node;
+    // private _meshHelperDynamic: Node;
+    // private _meshHelperStatic: Node;
 
     protected onEnable(): void {
         this._rigidBody = this.node.getComponent(RigidBody);
         this._collider = this.node.getComponent(Collider);
-        this._mask = this._collider.getMask();
 
-        this._meshHelperDynamic = this.node.getChildByName('helper-dynamic');
-        this._meshHelperDynamic.active = false;
 
-        this._meshHelperStatic = this.node.getChildByName('helper-static');
-        this._meshHelperStatic.active = false;
+        // this._mask = this._collider.getMask();
+
+        // this._meshHelperDynamic = this.node.getChildByName('helper-dynamic');
+        // this._meshHelperDynamic.active = false;
+
+        // this._meshHelperStatic = this.node.getChildByName('helper-static');
+        // this._meshHelperStatic.active = false;
 
 
         // if (this.node.name === 'orange') {
         // if (this.node.name === 'watermelon') {
         //     this.togglePhysics(true);
+
         //     this.scheduleOnce(() => {
         //         console.log(this.node.worldPosition, this.node.worldRotation);
         //     }, 10)
@@ -39,12 +42,13 @@ export class Fruit extends Component {
         this._collider.enabled = true;
     }
 
-  
+
     setCharacter(character: Node) {
         this._character = character;
     }
 
     togglePhysics(isOn: boolean) {
+
         this._rigidBody.enabled = isOn;
         this._collider.enabled = isOn;
         if (isOn) {
@@ -77,9 +81,6 @@ export class Fruit extends Component {
 
         const dist = Vec3.distance(this._character.worldPosition, this.node.worldPosition);
         this.togglePhysics(dist < this._checkDistance + 2);
-
-
-
     }
 }
 

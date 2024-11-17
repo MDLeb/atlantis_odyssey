@@ -5,10 +5,10 @@
         "exportChannels": [
           "AppLovin"
         ],
-          "projectName": "[0]_CC_Rope_puzzle",
+          "projectName": "[1]_CC_Atlantis_odyssey",
             "injectOptions": {
     "AppLovin": {
-      "head": "<script>window.apiName='AppLovin';if(mraid.getState()==='loading'){mraid.addEventListener('ready',onSdkReady)}else{onSdkReady()}function viewableChangeHandler(viewable){if(viewable){cc.game.run()}else{cc.game.pause()}}function onSdkReady(){mraid.addEventListener('viewableChange',viewableChangeHandler);if(mraid.isViewable()){showMyAd()}}var url='';var android='';if(/android/i.test(navigator.userAgent)){url=android}function showMyAd(){cc.game.run()}function AdRedirectProcessing(){mraid.open(url)}</script>",
+      "head": "<script>window.apiName='AppLovin';if(mraid.getState()==='loading'){mraid.addEventListener('ready',onSdkReady)}else{onSdkReady()}function viewableChangeHandler(viewable){if(viewable){cc.game.run()}else{cc.game.pause()}}function onSdkReady(){mraid.addEventListener('viewableChange',viewableChangeHandler);if(mraid.isViewable()){showMyAd()}}var url='https://www.apple.com/app-store/';var android='https://play.google.com/store/apps?hl=en';if(/android/i.test(navigator.userAgent)){url=android}function showMyAd(){cc.game.run()}function AdRedirectProcessing(){mraid.open(url)}</script>",
         "sdkScript": "<script src=\"./mraid.js\"></script>"
     },
     "IronSource": {
@@ -21,7 +21,7 @@
       "body": "<script type='text/javascript' charset='utf-8'>window.apiName='Google';var canvas = document.body.querySelector('canvas');function f(e){e.preventDefault();e.stopPropagation();};window.canvasFn = f;canvas.addEventListener('click', window.canvasFn);function addGoogleScript(fn){var headNode = document.getElementsByTagName('head')[0];var script = document.createElement('script');script.onload = function () {try {ExitApi.delayCloseButton(0);fn&&fn()} catch(e) {}};script.setAttribute('type', 'text/javascript');script.setAttribute('charset', 'utf-8');script.setAttribute('src', 'https://tpc.googlesyndication.com/pagead/gadgets/html5/api/exitapi.js');headNode.appendChild(script);}function AdRedirectProcessing(){addGoogleScript(function fn(){ExitApi&&ExitApi.exit()});canvas.removeEventListener('click', window.canvasFn);}</script>"
     },
     "Unity": {
-      "body": "<script>window.apiName='Unity';if(mraid.getState()==='loading'){mraid.addEventListener('ready',onSdkReady)}else{onSdkReady()}function viewableChangeHandler(viewable){if(viewable){cc.game.run()}else{cc.game.pause()}}function onSdkReady(){mraid.addEventListener('viewableChange',viewableChangeHandler);if(mraid.isViewable()){showMyAd()}}var url='';var android='';if(/android/i.test(navigator.userAgent)){url=android}function showMyAd(){cc.game.run()}function AdRedirectProcessing(){mraid.open(url)}</script>",
+      "body": "<script>window.apiName='Unity';if(mraid.getState()==='loading'){mraid.addEventListener('ready',onSdkReady)}else{onSdkReady()}function viewableChangeHandler(viewable){if(viewable){cc.game.run()}else{cc.game.pause()}}function onSdkReady(){mraid.addEventListener('viewableChange',viewableChangeHandler);if(mraid.isViewable()){showMyAd()}}var url='https://www.apple.com/app-store/';var android='https://play.google.com/store/apps?hl=en';if(/android/i.test(navigator.userAgent)){url=android}function showMyAd(){cc.game.run()}function AdRedirectProcessing(){mraid.open(url)}</script>",
         "sdkScript": "<script src=\"./mraid.js\"></script>"
     },
     "LoaderScript": {

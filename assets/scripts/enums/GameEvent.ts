@@ -19,6 +19,7 @@ export enum GameEvent {
 	INTERACTION_START,
 	INTERACTION,
 	INTERACTION_END,
+	INTERACTION_UPGRADE,
 
 	COLLECT_ITEM,//просто собираем на локации (из пустоты)
 	COLLECT_MONEY,//забираем деньги

@@ -8,7 +8,7 @@ import { Bubble } from '../Bubble';
 import { MoneyGenerator } from '../MoneyGenerator';
 const { ccclass, property } = _decorator;
 
-enum tableStates { NONE, ORDER, PAY };
+export enum areaStates { NONE, RECEIVE, PAY };
 
 @ccclass('ExchangingArea2')
 export class ExchangingArea2 extends Component {
@@ -29,12 +29,11 @@ export class ExchangingArea2 extends Component {
     receivingItem: CollectableItems = CollectableItems.NONE;
 
 
-    private _state: tableStates = tableStates.ORDER;
+    protected _state: areaStates = areaStates.RECEIVE;
+    protected _count: number = 10;
 
-    // private _isReceiving: boolean = false;//???
     private _orderedResource: CollectableItems = CollectableItems.ORANGE;
     private _isTweenActive: boolean = false;
-    private _count: number = 10;
 
     onEnable() {
         this._subscribeEvents(true);
@@ -64,13 +63,13 @@ export class ExchangingArea2 extends Component {
     onInteraction(node: Node) {
         if (this.node !== node) return;
 
-        if (this._state === tableStates.ORDER) {
+        if (this._state === areaStates.RECEIVE) {
             gameEventTarget.emit(GameEvent.RESOURCE_EXCHANGE, this.node, this._orderedResource);
         }
 
-        if (this._state === tableStates.PAY) {
+        if (this._state === areaStates.PAY) {
             gameEventTarget.emit(GameEvent.COLLECT_MONEY, this._count, this.collectPoint.node);
-            this._state = tableStates.NONE //???
+            this._state = areaStates.NONE //???
             this._onExchangeComplete();
         }
     }
@@ -103,14 +102,14 @@ export class ExchangingArea2 extends Component {
     }
 
     _onExchangeReady() {
-        this._state = tableStates.NONE;
+        this._state = areaStates.NONE;
         this.moneyGenerator && this.moneyGenerator.onExchangeReady();
         this.bubbleCounter.toggle(false);
         this.collectPoint.node.removeAllChildren();
 
 
         this.scheduleOnce(() => {
-            this._state = tableStates.PAY;
+            this._state = areaStates.PAY;
         }, 1)
 
     }
@@ -120,8 +119,7 @@ export class ExchangingArea2 extends Component {
         this.bubbleCounter.setCounter(0, this._count);
 
         this.scheduleOnce(() => {
-            this._state = tableStates.ORDER;
-            console.log('+++++');
+            this._state = areaStates.RECEIVE;
             
             this.bubbleCounter.toggle(true);
         }, 1.5)

@@ -167,7 +167,7 @@
       "w": 0
     },
     "_bakeable": false,
-    "_castShadow": false,
+    "_castShadow": true,
     "_receiveShadow": false,
     "_recieveShadow": false,
     "_lightmapSize": 64,
@@ -184,16 +184,16 @@
     "node": {
       "__id__": 2
     },
-    "_enabled": false,
+    "_enabled": true,
     "__prefab": {
       "__id__": 7
     },
     "_group": 4,
     "_type": 1,
     "_mass": 2,
-    "_allowSleep": false,
-    "_linearDamping": 0.8,
-    "_angularDamping": 0.8,
+    "_allowSleep": true,
+    "_linearDamping": 0.9,
+    "_angularDamping": 0.9,
     "_useGravity": true,
     "_linearFactor": {
       "__type__": "cc.Vec3",
@@ -234,9 +234,9 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 0
+      "z": -0.05
     },
-    "_radius": 0.35,
+    "_radius": 0.33,
     "_id": ""
   },
   {

@@ -20,8 +20,6 @@ export class CharacterMovements extends Component {
 	onEnable() {
 		this._subscribeEvents(true);
 		this._animationController = this.node.getComponentInChildren(animation.AnimationController);
-		console.log(this._animationController);
-
 	}
 
 	onDisable() {
