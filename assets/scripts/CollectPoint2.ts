@@ -36,7 +36,6 @@ export class CollectPoint2 extends Component {
     })
     animationController: animation.AnimationController = null;
 
-    // private _resource: CollectableItems = null;
     private _resourcePool: Map<CollectableItems, Pool<Node>> = new Map();
     private _isTweenActive: boolean = false;
     private _characterIsMoving: boolean = false;

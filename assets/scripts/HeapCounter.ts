@@ -1,10 +1,8 @@
 import { _decorator, CCInteger, Component, Node, Pool, v3, Vec3 } from 'cc';
-import { GameEvent } from './enums/GameEvent';
-import { gameEventTarget } from './GameEventTarget';
 const { ccclass, property } = _decorator;
 
-@ccclass('CollectPoint')
-export class CollectPoint extends Component {
+@ccclass('HeapCounter')
+export class HeapCounter extends Component {
     @property(CCInteger)
     rows: number = 1;
 

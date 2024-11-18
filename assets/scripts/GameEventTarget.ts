@@ -1,4 +1,3 @@
-import { _decorator, Component, Node, EventTarget } from 'cc';
-const { ccclass, property } = _decorator;
+import { _decorator, EventTarget } from 'cc';
 
 export const gameEventTarget = new EventTarget();

@@ -1,10 +1,9 @@
-import { _decorator, CCBoolean, CCFloat, CCInteger, Collider, Component, instantiate, Line, MeshRenderer, Node, OctreeInfo, ParticleSystem, physics, Prefab, Quat, RigidBody, Script, tween, v3, Vec3 } from 'cc';
+import { _decorator, CCBoolean, CCFloat, CCInteger, Component, instantiate, Line, Node, ParticleSystem, physics, Prefab, Quat, RigidBody, tween, v3, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 import { configPosOranges } from './configPosOranges';
 import { configPosWatermelon } from './configPosWatermelons';
-// import { octree } from 'd3-octree';
 import { Fruit } from './Fruit';
-import Octree from './octree/octree';
+// import Octree from './octree/octree';
 
 
 @ccclass('FruitGenerator')
@@ -43,7 +42,7 @@ export class FruitGenerator extends Component {
 
     protected onEnable(): void {
         //@ts-ignore
-        // console.log(physics.PhysicsSystem.instance);
+        // //octree in case of optimization needs
         // this._line = this.node.getComponentInChildren(Line);
         // this._octree = new Octree(100, 8);
 
@@ -133,6 +132,7 @@ export class FruitGenerator extends Component {
 
         });
 
+        // //octree in case of optimization needs
         // this._octree.build(this._line, this._fruits, (fruit: Node) => {
         //     let meshRenderer = fruit.getComponentInChildren(MeshRenderer);
         //     if (meshRenderer) {
@@ -142,7 +142,8 @@ export class FruitGenerator extends Component {
         // });
     }
 
-    protected update(): void {
+    // protected update(): void {
+        // // octree in case of optimization needs
         // for (let [item] of this._oldOctreeNodes.entries()) {
         //     item.getComponentInChildren(Fruit).togglePhysics(false);
         // }
@@ -152,7 +153,5 @@ export class FruitGenerator extends Component {
         //     item.getComponentInChildren(Fruit).togglePhysics(true);
         // }
         // this._oldOctreeNodes = this._octreeNodes;
-    }
-
-
+    // }
 }

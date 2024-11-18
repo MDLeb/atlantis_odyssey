@@ -1,7 +1,7 @@
-import { _decorator, Component, Node, v2, Vec2, Vec3 } from 'cc';
+import { _decorator, Component, v2, Vec2, Vec3 } from 'cc';
 import { gameEventTarget } from './GameEventTarget';
 import { GameEvent } from './enums/GameEvent';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('Borders')
 export class Borders extends Component {
@@ -13,7 +13,7 @@ export class Borders extends Component {
 			const endPos3d = this.node.children[i + 1].worldPosition;
 
 			const borderLine = {
-				startPos: v2(startPos3d.x, startPos3d.z), 
+				startPos: v2(startPos3d.x, startPos3d.z),
 				endPos: v2(endPos3d.x, endPos3d.z)
 			};
 			this._borderLines.push(borderLine);
@@ -33,12 +33,8 @@ export class Borders extends Component {
 		this._subscribeEvents(false);
 	}
 
-	update(deltaTime: number) {
-		
-	}
-
 	private _subscribeEvents(isOn: boolean): void {
-		const func: string = isOn? 'on': 'off';
+		const func: string = isOn ? 'on' : 'off';
 
 		gameEventTarget[func](GameEvent.CORRECT_VELOCITY, this.onCorrectVelocity, this);
 	}
@@ -49,7 +45,7 @@ export class Borders extends Component {
 		const pos = v2(pos3d.x, pos3d.z);
 
 		for (let i = 0; i < this._borderLines.length; i++) {
-			
+
 			const borderLine = this._borderLines[i];
 
 			const centNewPos = v2();

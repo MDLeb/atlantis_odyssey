@@ -1,4 +1,4 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component } from 'cc';
 import { gameEventTarget } from './GameEventTarget';
 import { GameEvent } from './enums/GameEvent';
 const { ccclass, property } = _decorator;

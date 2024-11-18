@@ -1,7 +1,7 @@
 import { _decorator, CCInteger, Component, Enum, Node, Pool, tween, v3, Vec3 } from 'cc';
 import { GameEvent } from '../enums/GameEvent';
 import { gameEventTarget } from '../GameEventTarget';
-import { CollectPoint } from '../CollectPoint';
+import { HeapCounter } from '../HeapCounter';
 import { CollectableItems } from '../CollectableItems';
 import { ResourseSize } from '../ResourseSize';
 import { Bubble } from '../Bubble';
@@ -13,8 +13,8 @@ export enum areaStates { NONE, RECEIVE, PAY };
 @ccclass('ExchangingArea2')
 export class ExchangingArea2 extends Component {
 
-    @property(CollectPoint)
-    collectPoint: CollectPoint = null;
+    @property(HeapCounter)
+    collectPoint: HeapCounter = null;
 
     @property(Bubble)
     bubbleCounter: Bubble = null;

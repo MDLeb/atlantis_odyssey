@@ -1,4 +1,4 @@
-import { _decorator, Node, Billboard, builtinResMgr, CCFloat, CCInteger, Color, Component, director, EffectAsset, gfx, Material, Mesh, MeshRenderer, renderer, Sprite, SpriteFrame, Texture2D, toDegree, toRadian, utils, Vec4, Camera, v3, SpriteRenderer, tween, instantiate, CCBoolean, Vec3 } from 'cc';
+import { _decorator, Node, Component, director, Material, Camera, SpriteRenderer, tween, CCBoolean, Vec3 } from 'cc';
 import { CounterRenderer } from './CounterRenderer';
 const { ccclass, property } = _decorator;
 

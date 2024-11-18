@@ -1,8 +1,6 @@
 import { _decorator, Component, Collider, Enum } from 'cc';
 import { gameEventTarget } from '../GameEventTarget';
 import { GameEvent } from '../enums/GameEvent';
-import { CollectableItems } from '../CollectableItems';
-import { CollectPoint } from '../CollectPoint';
 const { ccclass, property } = _decorator;
 
 

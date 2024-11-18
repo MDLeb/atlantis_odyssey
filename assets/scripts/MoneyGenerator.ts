@@ -1,13 +1,12 @@
 import { _decorator, Component, Node, tween, v3 } from 'cc';
 import { gameEventTarget } from './GameEventTarget';
 import { GameEvent } from './enums/GameEvent';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('MoneyGenerator')
 export class MoneyGenerator extends Component {
 
     private _cashMeshes: Node[] = [];
-
 
     onEnable() {
         this._cashMeshes = this.node.children;
@@ -32,8 +31,6 @@ export class MoneyGenerator extends Component {
                 .start()
         });
     }
-
-
 }
 
 

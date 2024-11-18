@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, v3, Vec3 } from 'cc';
+import { _decorator, Component, v3, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('ResourseSize')

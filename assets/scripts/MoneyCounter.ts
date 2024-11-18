@@ -1,7 +1,7 @@
-import { _decorator, Component, Label, Node } from 'cc';
+import { _decorator, Component, Label } from 'cc';
 import { GameEvent } from './enums/GameEvent';
 import { gameEventTarget } from './GameEventTarget';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('MoneyCounter')
 export class MoneyCounter extends Component {

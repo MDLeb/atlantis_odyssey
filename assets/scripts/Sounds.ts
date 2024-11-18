@@ -1,4 +1,4 @@
-import { _decorator, AudioClip, AudioSource, Component, Enum, Node } from 'cc';
+import { _decorator, AudioSource, Component, Enum } from 'cc';
 import { GameEvent } from './enums/GameEvent';
 import { gameEventTarget } from './GameEventTarget';
 const { ccclass, property } = _decorator;
@@ -9,9 +9,9 @@ export class SoundEvent {
     sound: AudioSource;
 
     @property({
-		type: Enum(GameEvent)
-	})
-	event: GameEvent = GameEvent.NONE;
+        type: Enum(GameEvent)
+    })
+    event: GameEvent = GameEvent.NONE;
 }
 
 @ccclass('Sounds')
@@ -34,10 +34,6 @@ export class Sounds extends Component {
         this.soundMap.forEach(e => {
             gameEventTarget[func](e.event, () => e.sound.play())
         })
-
     }
-
-   
-
 }
 
