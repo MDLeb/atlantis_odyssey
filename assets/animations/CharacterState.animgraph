@@ -256,7 +256,7 @@
     "motion": {
       "__id__": 16
     },
-    "speed": 2,
+    "speed": 2.2,
     "speedMultiplier": "RunSpeedMultiplier",
     "speedMultiplierEnabled": false,
     "transitionInEventBinding": {
@@ -695,7 +695,7 @@
     "motion": {
       "__id__": 50
     },
-    "speed": 2,
+    "speed": 2.2,
     "speedMultiplier": "",
     "speedMultiplierEnabled": false,
     "transitionInEventBinding": {
