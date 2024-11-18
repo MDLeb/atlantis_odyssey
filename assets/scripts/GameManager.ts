@@ -14,28 +14,28 @@ export class GameManager extends Component {
     @property(ScreenButton)
     joystick: ScreenButton = null;
 
-    onEnable() {
+    protected onEnable() {
         this._subscribeEvents(true);
         this._onCanvasResize();
     }
 
-    onDisable() {
+    protected onDisable() {
         this._subscribeEvents(false);
     }
 
     private _subscribeEvents(isOn: boolean): void {
         const func: string = isOn ? 'on' : 'off';
 
-        gameEventTarget[func](GameEvent.INTERACTION_UPGRADE, this.onInteractionUpgrade, this);
+        gameEventTarget[func](GameEvent.INTERACTION_UPGRADE, this._onInteractionUpgrade, this);
         view[func]('canvas-resize', this._onCanvasResize, this);
     }
 
-    onInteractionUpgrade() {
+    private _onInteractionUpgrade() {
         this.joystick.enabled = false;
         this.ctaButton.enabled = true
     }
 
-    _onCanvasResize() {
+    private _onCanvasResize() {
         const { height, width } = screen.windowSize
         const aspect = width / height;
         const landscape = aspect > 1;

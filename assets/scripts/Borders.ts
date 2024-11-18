@@ -7,7 +7,7 @@ const { ccclass } = _decorator;
 export class Borders extends Component {
 	private _borderLines: any[] = [];
 
-	onEnable() {
+	protected onEnable() {
 		for (let i = 0; i < this.node.children.length - 1; i++) {
 			const startPos3d = this.node.children[i].worldPosition;
 			const endPos3d = this.node.children[i + 1].worldPosition;

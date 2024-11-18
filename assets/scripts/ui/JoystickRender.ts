@@ -20,11 +20,11 @@ export class JoystickRender extends Component {
 
 	private _isActive = false;
 
-	onEnable() {
+	protected onEnable() {
 		this._subscribeEvents(true);
 	}
 
-	onDisable() {
+	protected onDisable() {
 		this._subscribeEvents(false);
 	}
 
@@ -65,7 +65,7 @@ export class JoystickRender extends Component {
 		}
 	}
 
-	update(deltaTime: number) {
+	protected update(_deltaTime: number) {
 		if (this._isActive) {
 			gameEventTarget.emit(GameEvent.TOGGLE_TUTOR_HAND, false);
 		}

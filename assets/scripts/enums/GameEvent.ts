@@ -21,17 +21,14 @@ export enum GameEvent {
 	INTERACTION_END,
 	INTERACTION_UPGRADE,
 
-	COLLECT_ITEM,//просто собираем на локации (из пустоты)
+	COLLECT_ITEM,
 	COLLECT_ITEM_SOUND,
 	MAX_ITEMS,
 	GENERATE_MONEY_SOUND,
-	COLLECT_MONEY,//забираем деньги
+	COLLECT_MONEY,
 
 	CHANGE_MONEY_COUNTER,
 
-	RESOURCE_RECEIVE,//нода отдала чайлдов, принимаем на другой
-	RESOURCE_EXCHANGE, //когда готовы забирать с одной ноды и перекладывать в другую
-
-
-
+	RESOURCE_RECEIVE,
+	RESOURCE_EXCHANGE
 }

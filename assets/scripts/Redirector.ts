@@ -13,33 +13,33 @@ export class Redirector extends Component {
 
 	private _currentStoreLink: string = ''
 
-	onLoad(){
+	protected onLoad() {
 		//@ts-ignore
 		window.gameReady && window.gameReady();
 	}
 
-	onEnable() {
-		this._currentStoreLink = /android/i.test(navigator.userAgent)?
-			this.androidUrl: this.iOsUrl;
+	protected onEnable() {
+		this._currentStoreLink = /android/i.test(navigator.userAgent) ?
+			this.androidUrl : this.iOsUrl;
 
 		this._subscribeEvents(true);
 	}
 
-	onDisable() {
+	protected onDisable() {
 		this._subscribeEvents(false);
 	}
 
 	private _subscribeEvents(isOn: boolean): void {
-		const func = isOn? 'on': 'off';
+		const func = isOn ? 'on' : 'off';
 
 		gameEventTarget[func](GameEvent.REDIRECT_PROCESSING, this.onRedirectProcessing, this);
 	}
 
-	onRedirectProcessing() {
+	private onRedirectProcessing() {
 		try {
 			//@ts-ignore
 			window.AdRedirectProcessing();
-		} catch(e) {
+		} catch (e) {
 			window.open(this._currentStoreLink);
 		}
 	}

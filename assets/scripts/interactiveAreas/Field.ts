@@ -10,11 +10,11 @@ export class Field extends Component {
     fruit: CollectableItems = CollectableItems.NONE;
 
 
-    onEnable() {
+    protected onEnable() {
         this._subscribeEvents(true);
     }
 
-    onDisable() {
+    protected onDisable() {
         this._subscribeEvents(false);
     }
 
@@ -22,17 +22,13 @@ export class Field extends Component {
         const func: string = isOn ? 'on' : 'off';
 
         gameEventTarget[func](GameEvent.INTERACTION, this.onInteraction, this)
-        gameEventTarget[func](GameEvent.INTERACTION_END, this.onInteractionEnd, this)
     }
 
-    onInteraction(node: Node) {
+    private onInteraction(node: Node) {
         if (this.node !== node) return;
         gameEventTarget.emit(GameEvent.COLLECT_ITEM, this.fruit)
     }
 
-    onInteractionEnd() {
-
-    }
 }
 
 

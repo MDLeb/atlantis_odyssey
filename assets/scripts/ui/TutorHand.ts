@@ -13,15 +13,15 @@ export class TutorHand extends Component {
 	private _isActive: boolean = true;
 
 
-	onEnable() {
+	protected onEnable() {
 		this._subscribeEvents(true);
 	}
 
-	onDisable() {
+	protected onDisable() {
 		this._subscribeEvents(false);
 	}
 
-	update(deltaTime: number) {
+	protected update(deltaTime: number) {
 		if (!this._isActive) {
 			if (this._showTimer < 0) {
 				gameEventTarget.emit(GameEvent.TOGGLE_TUTOR_HAND, true);

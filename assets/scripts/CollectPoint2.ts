@@ -42,11 +42,11 @@ export class CollectPoint2 extends Component {
     private _itemsLength: number = 0;
     private _soundPlay: boolean = false;
 
-    onEnable() {
+    protected onEnable() {
         this._subscribeEvents(true);
     }
 
-    onDisable() {
+    protected onDisable() {
         this._subscribeEvents(false);
     }
 
@@ -103,7 +103,7 @@ export class CollectPoint2 extends Component {
         const { prefab, itemName } = resource;
         this._isTweenActive = true;
 
-        //если пул для текущего ресурса еще не создан в мапе
+        //if pool for current resourse doesn't exist in the map
         if (!this._resourcePool.has(item)) {
             this._resourcePool.set(item, new Pool<Node>(() => {
                 return instantiate(prefab);

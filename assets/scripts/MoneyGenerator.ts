@@ -8,14 +8,14 @@ export class MoneyGenerator extends Component {
 
     private _cashMeshes: Node[] = [];
 
-    onEnable() {
+    protected onEnable() {
         this._cashMeshes = this.node.children;
         this._cashMeshes.forEach((i: Node) => {
             i.scale = v3(0, 0, 0);
         });
     }
 
-    onExchangeReady() {
+    public onExchangeReady() {
         gameEventTarget.emit(GameEvent.GENERATE_MONEY_SOUND)
         this._cashMeshes.forEach((i: Node) => {
             tween(i)
@@ -24,7 +24,7 @@ export class MoneyGenerator extends Component {
                 .start()
         });
     }
-    onExchangeComplete() {
+    public onExchangeComplete() {
         this._cashMeshes.forEach((i: Node) => {
             tween(i)
                 .to(0.3, { scale: v3(0, 0, 0) })

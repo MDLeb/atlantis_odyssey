@@ -1,4 +1,4 @@
-import { _decorator, Component, Enum, EventTouch, Input, Node, Vec2 } from 'cc';
+import { _decorator, Component, Enum, EventTouch, Input, Vec2 } from 'cc';
 import { InteractionType } from './InteractionType';
 import { CommandDict } from './CommandDict';
 import { gameEventTarget } from '../GameEventTarget';

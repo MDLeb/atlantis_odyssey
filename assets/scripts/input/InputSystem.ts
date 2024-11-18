@@ -1,9 +1,9 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component } from 'cc';
 import { ScreenButton } from './ScreenButton';
 import { gameEventTarget } from '../GameEventTarget';
 import { GameEvent } from '../enums/GameEvent';
 import { InteractionType } from './InteractionType';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass('InputSystem')
 export class InputSystem extends Component {
@@ -12,15 +12,15 @@ export class InputSystem extends Component {
 	_idInterButtonMap: Map<string, ScreenButton> = new Map();
 	_idInterCommandMap: Map<string, Function> = new Map();
 
-	onEnable() {
+	protected onEnable() {
 		this._subscribeEvents(true);
 	}
 
-	onDisable() {
+	protected onDisable() {
 		this._subscribeEvents(false);
 	}
 
-	update(deltaTime: number) {
+	protected update(_deltaTime: number) {
 		let hasInput = false;
 
 		this._idInterArray.forEach(idInter => {
@@ -44,7 +44,7 @@ export class InputSystem extends Component {
 	}
 
 	private _subscribeEvents(isOn: boolean) {
-		const func = isOn? 'on': 'off';
+		const func = isOn ? 'on' : 'off';
 
 		gameEventTarget[func](GameEvent.REGISTER_BUTTON, this.onRegisterButton, this);
 		gameEventTarget[func](GameEvent.UNREGISTER_BUTTON, this.onUnregisterButton, this);

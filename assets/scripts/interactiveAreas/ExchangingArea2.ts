@@ -31,21 +31,20 @@ export class ExchangingArea2 extends Component {
 
     protected _state: areaStates = areaStates.RECEIVE;
     protected _count: number = 10;
-
     private _orderedResource: CollectableItems = CollectableItems.ORANGE;
     private _isTweenActive: boolean = false;
 
     onEnable() {
         this._subscribeEvents(true);
         this._count = this.count;
-        this.setOrderedResource(this.receivingItem, this.count);
+        this._setOrderedResource(this.receivingItem, this.count);
     }
 
     onDisable() {
         this._subscribeEvents(false);
     }
 
-    setOrderedResource(resource: CollectableItems, count: number) {
+    private _setOrderedResource(resource: CollectableItems, count: number) {
         this._orderedResource = resource;
         this._count = count;
         this.bubbleCounter.setCounter(0, count)
@@ -56,7 +55,6 @@ export class ExchangingArea2 extends Component {
         const func: string = isOn ? 'on' : 'off';
 
         gameEventTarget[func](GameEvent.INTERACTION, this.onInteraction, this)
-        gameEventTarget[func](GameEvent.INTERACTION_END, this.onInteractionEnd, this)
         gameEventTarget[func](GameEvent.RESOURCE_RECEIVE, this.onResourceReceive, this)
     }
 
@@ -146,17 +144,6 @@ export class ExchangingArea2 extends Component {
 
             this.bubbleCounter.toggle(true);
         }, 1.5)
-    }
-
-    onResourceExchange() {
-
-    }
-
-    onInteractionEnd(node: Node) {
-        if (this.node !== node) return;
-
-        // this._isReceiving = false;
-
     }
 
 }

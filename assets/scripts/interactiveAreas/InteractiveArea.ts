@@ -1,7 +1,7 @@
-import { _decorator, Component, Collider, Enum } from 'cc';
+import { _decorator, Component, Collider } from 'cc';
 import { gameEventTarget } from '../GameEventTarget';
 import { GameEvent } from '../enums/GameEvent';
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 
 @ccclass('InteractiveArea')
@@ -10,12 +10,12 @@ export class InteractiveArea extends Component {
 	private _collider: Collider = null;
 	private _interactionUpdate: boolean = false;
 
-	onEnable() {
+	protected onEnable() {
 		this._collider = this.node.getComponent(Collider);
 		this._subscribeEvents(true);
 	}
 
-	onDisable() {
+	protected onDisable() {
 		this._subscribeEvents(false);
 	}
 
@@ -27,17 +27,17 @@ export class InteractiveArea extends Component {
 
 	}
 
-	onTriggerEnter() {
+	private onTriggerEnter() {
 		gameEventTarget.emit(GameEvent.INTERACTION_START, this.node)
 		this._interactionUpdate = true;
 	}
 
-	onTriggerExit() {
+	private onTriggerExit() {
 		this._interactionUpdate = false;
 		gameEventTarget.emit(GameEvent.INTERACTION_END, this.node)
 	}
 
-	update() {
+	protected update(dt: number): void {
 		if (this._interactionUpdate) {
 			gameEventTarget.emit(GameEvent.INTERACTION, this.node)
 		}

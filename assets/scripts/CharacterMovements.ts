@@ -17,16 +17,16 @@ export class CharacterMovements extends Component {
 	private _animationController: animation.AnimationController = null;
 
 
-	onEnable() {
+	protected onEnable() {
 		this._subscribeEvents(true);
 		this._animationController = this.node.getComponentInChildren(animation.AnimationController);
 	}
 
-	onDisable() {
+	protected onDisable() {
 		this._subscribeEvents(false);
 	}
 
-	update(dt: number) {
+	protected update(dt: number) {
 		if (this._cVelocity.length() > 0) {
 			let velocity = Vec3.multiplyScalar(v3(), this._cVelocity, dt);
 
