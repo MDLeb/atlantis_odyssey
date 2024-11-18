@@ -26,7 +26,8 @@ export enum GameEvent {
 	MAX_ITEMS,
 	GENERATE_MONEY_SOUND,
 	COLLECT_MONEY,//забираем деньги
-	SPENT_MONEY,//тратим деньги
+
+	CHANGE_MONEY_COUNTER,
 
 	RESOURCE_RECEIVE,//нода отдала чайлдов, принимаем на другой
 	RESOURCE_EXCHANGE, //когда готовы забирать с одной ноды и перекладывать в другую

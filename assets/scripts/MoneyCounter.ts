@@ -21,19 +21,14 @@ export class MoneyCounter extends Component {
     private _subscribeEvents(isOn: boolean) {
         const func = isOn ? 'on' : 'off';
 
-        gameEventTarget[func](GameEvent.SPENT_MONEY, this.onSpentMoney, this);
-        gameEventTarget[func](GameEvent.COLLECT_MONEY, this.onCollectMoney, this);
+        gameEventTarget[func](GameEvent.CHANGE_MONEY_COUNTER, this.onChangeMoneyCounter, this);
     }
 
-    onSpentMoney() {
-        this._label.string = `${Number(this._label.string) - 1}`
-    }
-
-    onCollectMoney(count: number) {
-        for (let i = 0; i < count; i++) {
+    onChangeMoneyCounter(count: number) {
+        for (let i = 0; i < Math.abs(count); i++) {
             this.scheduleOnce(() => {
-                this._label.string = `${Number(this._label.string) + 1}`
-            }, i * 0.15)
+                this._label.string = `${Number(this._label.string) + (count > 0 ? 1 : -1)}`
+            }, i * 0.05)
         }
     }
 }

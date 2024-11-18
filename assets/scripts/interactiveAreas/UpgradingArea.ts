@@ -24,9 +24,9 @@ export class UpgradingArea extends ExchangingArea2 {
         gameEventTarget.emit(GameEvent.INTERACTION_UPGRADE, this.node);
 
         const component1 = this.toActivateNode.getComponent(FruitGenerator);
-        const component2 = this.toActivateNode.getComponent(InteractiveArea);
+        // const component2 = this.toActivateNode.getComponent(InteractiveArea);
         component1.enabled = true;
-        component2.enabled = true;
+        // component2.enabled = true;
         this.node.active = false;
     }
 

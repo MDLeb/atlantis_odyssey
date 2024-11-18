@@ -171,6 +171,7 @@ export class CollectPoint2 extends Component {
                     onComplete: () => {
                         if (i >= count - 1) {
                             this._isTweenActive = false;
+                            gameEventTarget.emit(GameEvent.CHANGE_MONEY_COUNTER, count);
                         }
                     },
                     onUpdate: (newResource, ratio) => {

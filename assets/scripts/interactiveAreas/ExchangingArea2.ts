@@ -85,10 +85,6 @@ export class ExchangingArea2 extends Component {
         let startPos: Vec3 = resourceNode.worldPosition.clone();
         let nextPos: Vec3 = this.collectPoint.getNextPosition();
 
-        if (this._orderedResource === CollectableItems.MONEY) {
-            gameEventTarget.emit(GameEvent.SPENT_MONEY);
-        }
-
         tween(resourceNode)
             .to(0.05, { scale: v3(1.2, 1.2, 1.2) }, {
                 onStart: () => {
@@ -108,15 +104,19 @@ export class ExchangingArea2 extends Component {
                     );
                 },
                 onComplete: () => {
-                    this.bubbleCounter.setCounter(this.collectPoint.node.children.length, this._count)
+                    this.bubbleCounter.setCounter(this.collectPoint.node.children.length, this._count);
                     this._isTweenActive = false;
+
+
+                    if (resourceNode.name === 'money') {
+                        gameEventTarget.emit(GameEvent.CHANGE_MONEY_COUNTER, -1);
+                    }
 
                     if (this.collectPoint.node.children.length >= this._count) {
                         let length = this.collectPoint.node.children.length;
                         for (let i = 0; i < length; i++) {
                             pool.free(this.collectPoint.node.children[i]);
                         }
-
                         this._onExchangeReady();
                     }
                 }
